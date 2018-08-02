@@ -42,6 +42,7 @@ import action.MemberSuspendDeleteAction;
 import action.MemberSuspendListAction;
 import action.MoreListAction;
 import ajax.Ajax;
+import ajax.IdOverlapCheckAjax;
 import ajax.IndexLikeListAjax;
 import ajax.IndexTopListAjax;
 import bean.ActionForward;
@@ -107,6 +108,16 @@ public class MemberController extends HttpServlet {
 
 		} else if (command.equals("/indexLikeList.kly")) {
 			ajax = new IndexLikeListAjax();
+			try {
+				responseText = ajax.getJSON(request, response); // JSON
+				response.getWriter().write(responseText);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+			// 아이디 중복체크
+		} else if (command.equals("/idOverlapCheck.kly")) {
+			ajax = new IdOverlapCheckAjax();
 			try {
 				responseText = ajax.getJSON(request, response); // JSON
 				response.getWriter().write(responseText);

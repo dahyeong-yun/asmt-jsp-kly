@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+	.warn {
+		border : 1px red solid;
+	}
+</style>
 </head>
 <body>
 
@@ -91,38 +97,7 @@
                 </div>
             </div>
         </div>
-<script>
-	/* 아이디 중복체크 */
-	function idCheck() {
-		var memberID = $('#id').val();
-		$.ajax({
-			type : "POST",
-			url : "./memberJoinIdCheck.kly",
-			data: {memberID : memberID},
-			success: function(result) {
-				if(result == 1) {
-					$('#idCheckMessage').html('사용할 수 있는 아이디 입니다.');
-					$('#checkType').attr('class','modal-content pannel-success');
-				} else {
-					$('#idCheckMessage').html('사용할 수 없 아이디 입니다.');
-					$('#checkType').attr('class','modal-content pannel-warning');
-				}
-				$('#idCheckForm').modal("show");
-			}
-			
-		})
-	}
-	
-	function passCheck() {
-		var pass1 = $("#pass1").val();
-		var pass2 = $("#pass2").val();
-		if(pass1 != pass2) {
-			$("#passCheckMessage").html("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-		} else {
-			$("#passCheckMessage").html("");
-		}
-	}
-</script>
+
         <!-- 회원가입(modal) -->
         <div class="modal" id="joinForm">
             <div class="modal-dialog">
@@ -131,28 +106,37 @@
                         <h4 class="modal-title">회원가입</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <form action="memberJoin.kly" method="post">
+                    <form action="memberJoin.kly" method="post" id="joinFomat">
                         <div class="form-group">
                             <div class="modal-body">
+                                
                                 <div class="row">
 									<div class="col-sm">
 		                                <h5><label>아이디</label></h5>
-		                                <input class="form-control" name="MEMBER_ID" type="text" id="id" placeholder="아이디를 입력해 주세요."/>
-									<!-- </div>
-									<div class="col-sm">
-										<button class="btn btn-primary" onclick="idCheck()">아이디 중복체크</button> -->
+		                            	<div class="row">
+											<div class="col-sm-9">
+		                                		<input class="form-control" name="MEMBER_ID" type="text" id="id" placeholder="아이디를 입력해 주세요."/>
+											</div>
+									
+											<div class="col-sm-3">
+												<button class="btn btn-info" onclick="idCheck()">중복체크</button>
+											</div>
+										</div>
 									</div>
                                 </div>
 
-                                <div class="row mt-2 mb-2">
-                                   <div class="col-sm">
-                                       <label><h5>비밀번호</h5></label>
-                                        <input class="form-control" name="MEMBER_PW" type="password" id="pass1" onkeyup="passCheck()" placeholder="비밀번호를 입력해 주세요."/>
-                                    </div>
-                                    <div class="col-sm">
-                                        <label><h5>비밀번호 확인</h5></label>
-                                        <input class="form-control" type="password" id="pass2" onkeyup="passCheck()" placeholder="비밀번호를 한번 더  입력해 주세요."/>
-                                    </div>
+								<div class="row mt-2 mb-2">
+									
+									<div class="col-sm">
+										<label><h5>비밀번호</h5></label>
+										<input class="form-control" name="MEMBER_PW" type="password" id="pass1" onkeyup="passCheck()" placeholder="비밀번호를 입력해 주세요."/>
+									</div>
+									
+									<div class="col-sm">
+										<label><h5>비밀번호 확인</h5></label>
+										<input class="form-control" type="password" id="pass2" onkeyup="passCheck()" placeholder="비밀번호를 한번 더  입력해 주세요."/>
+									</div>
+									
                                 </div>
                                 
                                 <label><h5>이메일</h5></label>
@@ -162,13 +146,65 @@
                             </div>
 							<div class="modal-footer">
 								<p style="color:red;" id="passCheckMessage"></p>
-                                <button class="btn btn-primary" type="submit">가입</button>
+                                <button class="btn btn-primary" onclick="join()">가입</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        
+<script>
+	var overlap = 0; // 0  중복체크 안함, 1 했고 중복 안됌
+	
+	/* 아이디 중복체크 */
+	function idCheck() {
+		var id = document.getElementById("id");
+		var req = new XMLHttpRequest();
+		req.onreadystatechange = function() {
+			if(this.readyState == 4 && this.status == 200) {
+				var out = JSON.parse(this.responseText);
+
+				if(out.result == "yes") {
+					alert('아이디가 존재합니다.');
+				} else {
+					alert('사용 가능한 아이디 입니다.');
+					overlap = 1;
+				}
+				document.getElementById("idCheckMessage").innerHTML = out;
+			}
+		}
+		req.open("GET","./idOverlapCheck.kly?check="+id.value, true);
+		req.send();
+	}
+	
+	/* 패스워드 일치 알림 */
+	function passCheck() {
+		var pass1 = $("#pass1").val();
+		var pass2 = $("#pass2").val();
+		if(pass1 != pass2) {
+			$("#passCheckMessage").html("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			$("#pass1").addClass("warn");
+			$("#pass2").addClass("warn")
+		} else {
+			$("#passCheckMessage").html("");
+			$("#pass1").removeClass("warn");
+			$("#pass2").removeClass("warn");
+		}
+	}
+	
+	/* */
+	function join() {
+		// 아이디 중복체크가 완료되고
+		
+		// 비밀번호가 일치하고
+		// 모든 칸의 value가 있을 때 submit()
+		
+		$("joinFormat").submit();
+	}
+</script>
+
+
 
 	<!-- 회원 비밀번호 찾기(modal) -->
 	<form action="memberFindPass.kly" method="post">
@@ -197,7 +233,7 @@
 	
 	<!-- 아이디 중복 체크 -->
 	<div class="modal" id="idCheckForm" tabindex="-1" role="diolog" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content panel-info %>" id="checkType">
 				 <div class="modal-header">
 					<h4 class="modal-title">확인 메세지</h4>

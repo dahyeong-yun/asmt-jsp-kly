@@ -9,6 +9,7 @@ import dao.MemberDAO;
 
 public class MemberJoinService {
 
+	/** 회원가입 */
 	public int joinMember(MemberBean mb) {
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		Connection con = getConnection();
@@ -26,6 +27,18 @@ public class MemberJoinService {
 		
 		close(con);
 		
+		return result;
+	}
+	
+	/** id 중복체크 */
+	public boolean idCheck(String inputId) {
+		MemberDAO memberDAO = MemberDAO.getInstance();
+		Connection con = getConnection();
+		memberDAO.setConnection(con);
+		
+		boolean result = memberDAO.idCheck(inputId);
+		
+		close(con);
 		return result;
 	}
 

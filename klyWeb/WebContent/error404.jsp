@@ -26,6 +26,7 @@
 
 	<!-- 내용 부분 -->
 	<div class="container" style="max-width:560px">
+		<h1>404</h1>
 		<div class="alert alert-warning mt-4" role="alert">
 			확인할 수 없는 요청입니다.
 		</div>

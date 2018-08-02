@@ -464,5 +464,28 @@ public class MemberDAO {
 		}
 		return updateResult;
 	}
+
+	public boolean idCheck(String inputId) {
+		String sql = "SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = ?";
+		boolean result = false;
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				System.out.println(rs.getString(1));
+				result = true;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				close(pstmt);
+				close(rs);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 	
 }
