@@ -71,16 +71,16 @@
 
 											<!-- Modal body -->
 											<div class="modal-body">
-												<div class="form-group" id="category">
+												<div class="Zform-group" id="category">
 													<!-- <label for="category" style="display: inline;">게시판</label> -->
 													<select class="form-control" name="category"
 														id="selectedCategory">
 														<option value="select" selected="selected">정지일수를
 															선택하세요</option>
-														<option value="week">7일</option>
-														<option value="half month">15일</option>
-														<option value="month">1달</option>
-														<option value="permanent">영구</option>
+														<option value="7">7일</option>
+														<option value="15">15일</option>
+														<option value="30">1달</option>
+														<option value="99999">영구</option>
 													</select>
 												</div>
 											</div>
