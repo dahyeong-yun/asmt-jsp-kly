@@ -13,22 +13,22 @@ import dao.MemberDAO;
 
 public class MemberSuspendService {
 
-	public boolean memberSuspend(String iD) {
+	public boolean memberSuspend(String iD, String whatDay) {
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		Connection con = getConnection();
 		memberDAO.setConnection(con);
-		
-		boolean modifyResult = false;
-		
-		int result = memberDAO.memberSuspend(iD);
 
-		if(result != 0) {
+		boolean modifyResult = false;
+
+		int result = memberDAO.memberSuspend(iD, whatDay);
+
+		if (result != 0) {
 			modifyResult = true;
 			commit(con);
 		} else {
 			rollback(con);
 		}
-		
+
 		close(con);
 		return modifyResult;
 

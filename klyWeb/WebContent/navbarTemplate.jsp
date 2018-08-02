@@ -39,7 +39,7 @@
 			
 			<c:when test="${loginInfo.getMEMBER_ID().equals('admin')}">
         		<div class="btn-group">
-		       		 <button class="btn btn-outline-info" onclick="location.href='./BoardSuspendList.kly'">
+		       		 <button class="btn btn-outline-info" onclick="location.href='./boardSuspendList.kly'">
 	        	    	관리자 모드
 	        	    </button>
 	        	    <button class="btn btn-outline-danger" onclick="location.href='./memberLogout.kly'">

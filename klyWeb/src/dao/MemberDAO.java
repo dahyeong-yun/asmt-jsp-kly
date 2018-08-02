@@ -341,13 +341,14 @@ public class MemberDAO {
 
 	}
 
-	public int memberSuspend(String iD) {	//멤버 정지
-		String sql = "UPDATE MEMBER SET MEMBER_SUSPENDED = 1 WHERE MEMBER_ID = ?";
+	public int memberSuspend(String iD, String whatDay) {	//멤버 정지
+		String sql = "UPDATE MEMBER SET MEMBER_SUSPENDED = SYSDATE+? WHERE MEMBER_ID = ?";
 		System.out.println("memberSuspend DAO");
 		int result = 0;
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, iD);
+			pstmt.setString(1, whatDay);
+			pstmt.setString(2, iD);
 			result = pstmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -451,7 +452,7 @@ public class MemberDAO {
 	}
 
 	public int relieveSuspendBoard(String mEM_ID) { // 멤버 정지 해제
-		String sql = "UPDATE MEMBER SET MEMBER_SUSPENDED = 0 WHERE MEMBER_ID=?";
+		String sql = "UPDATE MEMBER SET MEMBER_SUSPENDED = NULL WHERE MEMBER_ID=?";
 		int updateResult = 0;
 		try {
 			pstmt = con.prepareStatement(sql);
