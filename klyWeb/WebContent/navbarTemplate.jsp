@@ -115,11 +115,11 @@
 		                                <h5><label>아이디</label></h5>
 		                            	<div class="row">
 											<div class="col-sm-9">
-		                                		<input class="form-control" name="MEMBER_ID" type="text" id="id" placeholder="아이디를 입력해 주세요."/>
+		                                		<input class="form-control" name="MEMBER_ID" type="text" id="joinId" placeholder="아이디를 입력해 주세요."/>
 											</div>
 									
 											<div class="col-sm-3">
-												<button class="btn btn-info" onclick="idCheck()">중복체크</button>
+												<button type="button" class="btn btn-info" id="checkButton" onclick="idCheck()">중복체크</button> <!-- 중복체크 완료시 disable -->
 											</div>
 										</div>
 									</div>
@@ -140,13 +140,13 @@
                                 </div>
                                 
                                 <label><h5>이메일</h5></label>
-                                <input class="form-control" name="MEMBER_EMAIL" type="email" id="email" placeholder="이메일을 입력해 주세요."/>
+                                <input class="form-control" name="MEMBER_EMAIL" type="email" id="inputEmail" placeholder="이메일을 입력해 주세요."/>
                                 
                                     
                             </div>
 							<div class="modal-footer">
 								<p style="color:red;" id="passCheckMessage"></p>
-                                <button class="btn btn-primary" onclick="join()">가입</button>
+                                <button type="button" class="btn btn-primary" onclick="join()">가입</button>
                             </div>
                         </div>
                     </form>
@@ -156,22 +156,33 @@
         
 <script>
 	var overlap = 0; // 0  중복체크 안함, 1 했고 중복 안됌
+	var passConfirm = 0;
 	
 	/* 아이디 중복체크 */
 	function idCheck() {
-		var id = document.getElementById("id");
-		var req = new XMLHttpRequest();
+		var id = document.getElementById("joinId");
+		
+		console.log("idCheck 실행");
+		if(id.value == ""){
+			console.log("null if문 실행")
+			alert('id를 입력해주세요');
+			return;
+		}
+		
+ 		var req = new XMLHttpRequest();
 		req.onreadystatechange = function() {
 			if(this.readyState == 4 && this.status == 200) {
 				var out = JSON.parse(this.responseText);
-
 				if(out.result == "yes") {
 					alert('아이디가 존재합니다.');
 				} else {
 					alert('사용 가능한 아이디 입니다.');
 					overlap = 1;
+					var checkbutton = document.getElementById("checkButton");
+					checkbutton.className += " disabled";
+					checkbutton.disabled = false;
+					console.log('버튼 비활성화 완료')
 				}
-				document.getElementById("idCheckMessage").innerHTML = out;
 			}
 		}
 		req.open("GET","./idOverlapCheck.kly?check="+id.value, true);
@@ -190,17 +201,26 @@
 			$("#passCheckMessage").html("");
 			$("#pass1").removeClass("warn");
 			$("#pass2").removeClass("warn");
+			 passConfirm = 1;
 		}
 	}
 	
 	/* */
 	function join() {
-		// 아이디 중복체크가 완료되고
-		
-		// 비밀번호가 일치하고
-		// 모든 칸의 value가 있을 때 submit()
-		
-		$("joinFormat").submit();
+		var email = $("#inputEmail").val();
+		if(overlap==0) {
+			alert("id 중복체크를 해주세요.");
+			return false;
+		} else if(passConfirm==0) {
+			alert("비밀번호가 일치하지 않습니다.");
+			return false;
+		} else if(email=="") {
+			console.log(email);
+			alert("이메일을 입력해 주세요.");
+			return false;
+		} else if(overlap==1 && passConfirm==1) {
+			$("#joinFomat").submit();
+		}
 	}
 </script>
 

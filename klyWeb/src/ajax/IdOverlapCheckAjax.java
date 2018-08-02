@@ -30,12 +30,12 @@ public class IdOverlapCheckAjax implements Ajax {
 		MemberJoinService memberJoinService = new MemberJoinService();
 		boolean checkResult = memberJoinService.idCheck(inputId);
 		
-		result.append("{'result':");
+		result.append("{\"result\":");
 		
 		if(checkResult) {
-			result.append("yes");
+			result.append("\"yes\"");
 		} else {
-			result.append("no");
+			result.append("\"no\"");
 		}
 		result.append("}");
 		

@@ -133,9 +133,12 @@
 			<button type="button" class="btn btn-outline-info"
 				style="width: 95%; margin: 5px 5px 80px 5px;" id="category"
 				onclick="location='boardCategory.kly?category=기타'">기타</button>
+			
+			
 			<button type="button" class="btn btn-outline-info"
 				style="width: 95%;" id="register"
-				onclick="location='boardWrite.jsp'">게시글 등록</button>
+				data-toggle="modal" data-target="#board" >게시글 등록</button>
+				
 			<!-- 검색기능  태그나 게시글 제목을 입력해 검색할 수 있음-->
 			<form action="./boardSearch.kly" method="post">
 				<div class="input-group mb-3">
@@ -268,11 +271,103 @@
 			</table>
 		</div>
 	</div>
+	
 	<!-- List페이지의 동영상게시 갯수를 누를때 마다 늘린다. 미구현  -->
 	<div class="js-btn" id="btn">
 		<%-- <input type="hidden" id="more" name="more" value="${more}"> --%>
 		<button type="button" class="btn btn-default btn-sm btn-block"
 			onclick="javascript:;" id="more">더보기</button>
 	</div>
+	
+	<!-- 게시글 등록 -->
+        <form action="./boardWrite.kly" method="get" id="boardWrite" onsubmit="return alertSelectCategory()">
+            <div class="modal fade" id="board">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Modal Heading</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+							<div class="form-group" id="category">
+ 								<label for="category" style="display:inline;">게시판</label>
+								<select class="form-control" name="category" id="selectedCategory">
+									<option value = "select" selected="selected">게시판을 선택하세요</option><!-- '게시판을 선택하세요'입력하면 alert : '게시판을 선택하세요' --> 
+									<option value = "free" >자유</option>
+									<option value = "pubg">배그</option>
+									<option value = "lol">롤</option>
+									<option value = "animal">동물</option>
+								</select>
+                            </div>
+						
+							<input type = hidden name="ID" value="${loginInfo.getMEMBER_ID()}">
+                        
+                            <div id="subject">
+                                <label for="subject" style="display:inline;">제목</label>
+                                <input type="text" class="form-control" name="subject" placeholder="게시글 제목을 입력하세요" required>
+                            </div>
+
+                            <div id="video">
+                                <label for="video_upload">동영상 올리기</label>
+                                <input type = "radio" id="video_upload" name="videoFile" value="upload" onclick="switchDisplay('input_upload');">
+                                
+                                <label for="video_URL">URL</label>
+                                <input type="radio" id="video_URL" name="videoURL" value="url" onclick="switchDisplay('input_url');">
+
+                                <div id="input_upload" style="display:none">
+                                    <input type="file" name="file">
+                                </div>
+
+                                <div id="input_url" style="display:none">
+                                    <input type="url" class="form-control" name="link" value="http://">
+                                </div>
+                            </div>
+
+
+                            <div id="tag">
+                                <label for="tag">태그</label>
+                                <input type="text"  class="form-control" name="tag" placeholder="태그와 태그는 해쉬태그로 구분하며, 10개까지 입력하실 수 있습니다.">
+                                <!-- <input type="text" name="tagnames" id="tagnames" class="box_input _click(TagValidator|TagNames) _keyup(TagValidator|ValidateTagNames) _blur(TagValidator|ValidateTagNames)"> -->
+                            </div>
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">등록</button><!-- data-dismiss="modal" -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+<script>
+	function alertSelectCategory() {
+		var whatCategory = document.getElementById("selectedCategory");
+		if (whatCategory.value == "select") {
+			alert('게시판을 선택하세요.');
+			document.getElementById("category").focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+    /*동영상 첨부 방식선택*/
+    function switchDisplay(select) {
+        if (select == "input_upload") {
+            document.getElementById("input_upload").style.display = "";
+            document.getElementById("input_url").style.display = 'none';
+        } else {
+             document.getElementById("input_upload").style.display = 'none';
+            document.getElementById("input_url").style.display = "";
+        }
+    }
+</script>
+
 </body>
 </html>

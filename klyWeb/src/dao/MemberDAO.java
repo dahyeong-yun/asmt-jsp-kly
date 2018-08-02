@@ -471,6 +471,7 @@ public class MemberDAO {
 		boolean result = false;
 		try {
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, inputId);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				System.out.println(rs.getString(1));
