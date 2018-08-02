@@ -16,48 +16,51 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>kly</title>
-  </head>
-  <body>
+</head>
+<body>
   
     <%@include file="./navbarTemplate.jsp" %>
     
     <!-- 내용 부분 -->
-    <div class="row mt-4 mb-4">
-		<div class="col-md-4 col-lg-2">
-			<div class="container">
-				<div class="list-group">
-					<a class="list-group-item" href="adminBoard.jsp">게시물 관리(관리자)</a>
-					<a class="list-group-item active" href="adminComment.kly">댓글 관리(관리자)</a>
-					<a class="list-group-item" href="adminMember.jsp">사용자 관리(관리자)</a>
+    <div class="container">
+    
+	    <div class="row mt-4 mb-4">
+			<div class="col-md-4 col-lg-3">
+				<div class="container">
+					<div class="list-group">
+						<a class="list-group-item" href="boardSuspendList.kly">게시물 관리(관리자)</a>
+						<a class="list-group-item active" href="adminComment.kly">댓글 관리(관리자)</a>
+						<a class="list-group-item" href="memberSuspendList.kly">사용자 관리(관리자)</a>
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		<div class="col-md-7 col-lg-10">
-			<table class="table table-hover">
-				<c:forEach var="comment" items="${suspendCommentList}">
-					<tr>
-						<td rowspan="4" style="width: 20%; vertical-align: middle;"><img src="./images/Lighthouse.jpg" class="img-thumbnail" alt="thumbnail" width="210"></td>
-						<td>댓글 번호&nbsp;${comment.COMMENT_NUM}</td>
-						<td rowspan="4" style="width: 15%; vertical-align: middle"><button type="button" class="btn">삭제</button>&nbsp;&nbsp;<button type="button" class="btn">해제</button></td>
-					</tr>
-					<tr>
-						<td>댓글 작성자 &nbsp;${comment.MEMBER_ID}</td>
-					</tr>
-					<tr>
-						<td>댓글 신고 수 &nbsp;${comment.COMMENT_BLIND}</td>
-					</tr>
-					<tr>
-						<td>댓글 작성 시간 &nbsp;${comment.COMMENT_DATE}</td>
-					</tr>
-		    	</c:forEach>
-			</table>
-		    	
-		    <div style="padding: 10px; text-align:center;">
-		    	<button type="button" class="btn btn-primary">이전</button>&nbsp;&nbsp;
-		    	<button type="button" class="btn btn-primary">다음</button>
-		    </div>
-    	</div>
+			
+			<div class="col-md-7 col-lg-8">
+				<table class="table table-hover">
+					<c:forEach var="comment" items="${suspendCommentList}">
+						<tr>
+							<td rowspan="4" style="width: 20%; vertical-align: middle;"><img src="./images/Lighthouse.jpg" class="img-thumbnail" alt="thumbnail" width="210"></td>
+							<td>댓글 번호&nbsp;${comment.COMMENT_NUM}</td>
+							<td rowspan="4" style="width: 15%; vertical-align: middle"><button type="button" class="btn">삭제</button>&nbsp;&nbsp;<button type="button" class="btn">해제</button></td>
+						</tr>
+						<tr>
+							<td>댓글 작성자 &nbsp;${comment.MEMBER_ID}</td>
+						</tr>
+						<tr>
+							<td>댓글 신고 수 &nbsp;${comment.COMMENT_BLIND}</td>
+						</tr>
+						<tr>
+							<td>댓글 작성 시간 &nbsp;${comment.COMMENT_DATE}</td>
+						</tr>
+			    	</c:forEach>
+				</table>
+			    	
+			    <div style="padding: 10px; text-align:center;">
+			    	<button type="button" class="btn btn-primary">이전</button>&nbsp;&nbsp;
+			    	<button type="button" class="btn btn-primary">다음</button>
+			    </div>
+	    	</div>
+	    </div>
     </div>
     
     <!-- 하단바(footer) -->

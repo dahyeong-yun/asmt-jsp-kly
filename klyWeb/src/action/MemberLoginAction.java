@@ -41,19 +41,27 @@ public class MemberLoginAction implements Action {
 		MemberLoginService mls = new MemberLoginService();
 
 		MemberBean loginInfo = mls.loginMember(mb);
+		
+		// 로그인 후처리를 위한 변수
 		ActionForward af = null;
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html;charset=UTF-8");
 
-		Date Member_suspendDate = loginInfo.getMEMBER_SUSPENED();
-		System.out.println("Member_suspendDate" + Member_suspendDate);
+		// 1) 로그인 정보를 불러오지 못했을 경우(로그인 실패)
 		if (loginInfo == null) {
 			out.println("<script>");
 			out.println("alert('로그인에 실패했습니다.');");
 			out.println("location.href='./index.jsp';");
 			out.println("</script>");
 			out.close();
-		} else if (loginInfo.getMEMBER_SUSPENED() != null) {
+		}
+		
+		// 정지 회원을 위한 데이터 불러오기
+		Date Member_suspendDate = loginInfo.getMEMBER_SUSPENED();
+		System.out.println("Member_suspendDate" + Member_suspendDate);
+		
+		// 2) 정지된 회원이 로그인 할 경우 
+		if (loginInfo.getMEMBER_SUSPENED() != null) {
 			if ( Member_suspendDate.compareTo(nowDate) == -1 || Member_suspendDate.compareTo(nowDate) == 0) { // || Member_suspendDate.compareTo(nowDate) == 0 1
 				MemberSuspendRelieveService memberSuspendRelieveService = new MemberSuspendRelieveService();
 				boolean deleteResult = memberSuspendRelieveService.RelieveSuspendBoard(MEM_ID);
@@ -72,21 +80,32 @@ public class MemberLoginAction implements Action {
 				out.close();
 			}
 		}
-		// 임시 비밀번호로 로그인할 경우 비밀번호 변경 페이지로 이동
+		// 3) 임시 비밀번호로 로그인할 경우 비밀번호 변경 페이지로 이동
 		else if (loginInfo.getMEMBER_SETTEMP() == 1) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginInfo", loginInfo);
 			af = new ActionForward();
 			af.setPath("./changeFromTemp.jsp");
 			af.setRedirect(true);
-		} else if (loginInfo != null) {
+		}
+		// 4) 이메일 인증을 수행하지 않았을 경우
+		else if (loginInfo.getMEMBER_CHECKED() == 0) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginInfo", loginInfo);
 			af = new ActionForward();
+			af.setPath("./emailSendConfirm.jsp");
+			af.setRedirect(true);
+		}
+		// 로그인 성공
+		else if (loginInfo != null) {
+			HttpSession session = request.getSession();
+			// 세션에 로그인 정보 저장
+			session.setAttribute("loginInfo", loginInfo);
+			af = new ActionForward();
+
 			// 성공 했으면 다시 메인 페이지로
 			af.setPath("./index.jsp");
 		}
-
 		return af;
 	}
 

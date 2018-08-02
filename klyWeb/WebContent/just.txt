@@ -1,5 +1,0 @@
-var o = {
-  name: 'Lee',
-  gender: 'male',
-  age: 20
-};

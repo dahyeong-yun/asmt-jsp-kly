@@ -28,6 +28,8 @@ public class IndexTopListAjax implements Ajax {
 		ArrayList<BoardBean> topReadcountList = boardTopListService.getTopReadcountList();
 		//ArrayList<BoardBean> topLikedList = boardTopListService.getTopLikeList();
 		
+		 
+				
 		/** JSON syntax
 		 * {
 		 *	"employees":[ "John", "Anna", "Peter" ]
@@ -40,14 +42,14 @@ public class IndexTopListAjax implements Ajax {
 			if(i == topReadcountList.size()-1) {
 				result.append("\"value"+ i +"\":"
 						+ "[\"" + topReadcountList.get(i).getBOARD_NUM() +"\","
-						+ "\"https://img.youtube.com/vi/5WCzoESZLTo/3.jpg\"," // https://img.youtube.com/vi/5WCzoESZLTo/3.jpg []링크 추가, [] 관련 DB 변경
+						+ "\"https://img.youtube.com/vi/"+topReadcountList.get(i).getBOARD_YOUTUBE_ID()+"/0.jpg\","
 						+ "\"" + topReadcountList.get(i).getBOARD_SUBJECT() +"\","
 						+ "\"" + topReadcountList.get(i).getBOARD_READCOUNT() +"\"]"
 						);
 			} else {
 				result.append("\"value"+ i +"\":"
 						+ "[\"" + topReadcountList.get(i).getBOARD_NUM() +"\","
-						+ "\"https://img.youtube.com/vi/5WCzoESZLTo/3.jpg\"," // https://img.youtube.com/vi/5WCzoESZLTo/3.jpg
+						+ "\"https://img.youtube.com/vi/"+topReadcountList.get(i).getBOARD_YOUTUBE_ID()+"/0.jpg\","
 						+ "\"" + topReadcountList.get(i).getBOARD_SUBJECT() +"\","
 						+ "\"" + topReadcountList.get(i).getBOARD_READCOUNT() +"\"], "
 						);

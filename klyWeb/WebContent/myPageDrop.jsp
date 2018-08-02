@@ -34,54 +34,56 @@
     <%@include file="./navbarTemplate.jsp" %>
     
     <!-- 내용 부분 -->
-    <h2 class="h1 ml-4 mt-4">My Page</h2>
-    <div class="row mt-4 mb-4">
-    
-        <!-- 좌측 링크 -->
-        <div class="col-md-4 col-lg-3">
-            <div class="container">
-                <div class="list-group">
-                    <a class="list-group-item" href="myPage.jsp">정보변경</a>
-                    <a class="list-group-item" href="myPageList.jsp?order=upload">게시물 관리</a>
-					<a class="list-group-item  active" href="myPageDrop.jsp">회원탈퇴</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-8 col-lg-9">
-            <div class="container">
-                <h2>회원탈퇴</h2>
-                <form class="form mt-5" action="memberDrop.kly">
-                    <div class="form-group">
-                       <div class="row mb-3">
-                            <div class="col-sm-3" style="text-align: center;">
-                                <label><h5>아이디</h5></label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input class="form-control" name="memberID" type="text" readonly="readonly" value="${loginInfo.getMEMBER_ID()}"/>
-                           </div>
-                        </div>
-                        
-                        <div class="row mb-3">
-                            <div class="col-sm-3" style="text-align: center;">
-                                <label><h5>현재 비밀번호</h5></label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input class="form-control" name="memberPW" type="text" />
-                           </div>
-                        </div>
-                        
-                        <div class="row text-right">
-                            <div class="col">
-                                <button class="btn btn-danger" type="submit">회원 탈퇴</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        
-        </div>
-        
+    <div class="container">
+	    <h2 class="h1 ml-4 mt-4">My Page</h2>
+	    <div class="row mt-4 mb-4">
+	    
+	        <!-- 좌측 링크 -->
+	        <div class="col-md-4 col-lg-3">
+	            <div class="container">
+	                <div class="list-group">
+	                    <a class="list-group-item" href="myPage.jsp">정보변경</a>
+	                    <a class="list-group-item" href="./myContent.kly?listType=article">게시물 관리</a>
+						<a class="list-group-item  active" href="myPageDrop.jsp">회원탈퇴</a>
+	                </div>
+	            </div>
+	        </div>
+	        
+	        <div class="col-md-8 col-lg-9">
+	            <div class="container">
+	                <h2>회원탈퇴</h2>
+	                <form class="form mt-5" action="memberDrop.kly">
+	                    <div class="form-group">
+	                       <div class="row mb-3">
+	                            <div class="col-sm-3" style="text-align: center;">
+	                                <label><h5>아이디</h5></label>
+	                            </div>
+	                            <div class="col-sm-9">
+	                                <input class="form-control" name="memberID" type="text" readonly="readonly" value="${loginInfo.getMEMBER_ID()}"/>
+	                           </div>
+	                        </div>
+	                        
+	                        <div class="row mb-3">
+	                            <div class="col-sm-3" style="text-align: center;">
+	                                <label><h5>현재 비밀번호</h5></label>
+	                            </div>
+	                            <div class="col-sm-9">
+	                                <input class="form-control" name="memberPW" type="text" />
+	                           </div>
+	                        </div>
+	                        
+	                        <div class="row text-right">
+	                            <div class="col">
+	                                <button class="btn btn-danger" type="submit">회원 탈퇴</button>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </form>
+	            </div>
+	        
+	        </div>
+	        
+	    </div>
     </div>
     
     <!-- 하단바(footer) -->

@@ -28,86 +28,87 @@
 	<%@include file="./navbarTemplate.jsp"%>
 
 	<!-- 내용 부분 -->
-	<div class="row mt-4 mb-4">
-		<div class="col-md-4 col-lg-2">
-			<div class="container">
-				<div class="list-group">
-					<a class="list-group-item" href="boardSuspendList.kly ">게시물관리(관리자)</a>
-					<a class="list-group-item" href="adminComment.kly">댓글관리(관리자)</a> <a
-						class="list-group-item active" href="memberSuspendList.kly">사용자관리(관리자)</a>
+	<div class="container">
+	
+		<div class="row mt-4 mb-4">
+			<div class="col-md-4 col-lg-3">
+				<div class="container">
+					<div class="list-group">
+						<a class="list-group-item" href="boardSuspendList.kly ">게시물 관리(관리자)</a>
+						<a class="list-group-item" href="adminComment.kly">댓글 관리(관리자)</a> <a
+							class="list-group-item active" href="memberSuspendList.kly">사용자 관리(관리자)</a>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="container">
-			<table class="table table-hover mt-3">
-
-				<tr>
-					<th>사용자 ID</th>
-					<th>회원가입 일시</th>
-					<th>회원 삭제</th>
-					<th>회원 정지</th>
-					<th>회원 정지해제</th>
-				</tr>
-				<c:forEach var="member" items="${MemberSuspendList}">
+			<div class="col-md-7 col-lg-8">
+				<table class="table table-hover">
 					<tr>
-						<td>${member.MEMBER_ID}</td>
-						<td>${member.MEMBER_DATE}</td>
-						<!-- <td><button type="button" class="btn" onclick="location.href='memberDrop.kly?MEMBER_ID=${member.MEMBER_ID}'">삭제</button></td> -->
-						<td><button type="button" class="btn" onclick="location.href='memberSuspedDelete.kly?MEMBER_ID=${member.MEMBER_ID}'">삭제</button></td>
-						<td><button type="button" class="btn" data-toggle="modal"
-								data-target="#board${member.MEMBER_ID}">정지</button> <!-- The Modal -->
-							<form action="./memberSuspend.kly" method="get"
-								id="memberSuspend" onsubmit="return alertSelectCategory()">
-								<div class="modal fade" id="board${member.MEMBER_ID}">
-									<div class="modal-dialog modal-lg">
-										<div class="modal-content">
-											<input type="text" name="MEMBER_ID"
-												value="${member.MEMBER_ID}">
-											<!-- Modal Header -->
-											<div class="modal-header">
-												<h4 class="modal-title">회원 정지</h4>
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-											</div>
-
-											<!-- Modal body -->
-											<div class="modal-body">
-												<div class="Zform-group" id="category">
-													<!-- <label for="category" style="display: inline;">게시판</label> -->
-													<select class="form-control" name="category"
-														id="selectedCategory">
-														<option value="select" selected="selected">정지일수를
-															선택하세요</option>
-														<option value="7">7일</option>
-														<option value="15">15일</option>
-														<option value="30">1달</option>
-														<option value="99999">영구</option>
-													</select>
+						<th>사용자 ID</th>
+						<th>회원가입 일시</th>
+						<th>회원 삭제</th>
+						<th>회원 정지</th>
+						<th>회원 정지해제</th>
+					</tr>
+					
+					<c:forEach var="member" items="${MemberSuspendList}">
+						<tr>
+							<td>${member.MEMBER_ID}</td>
+							<td>${member.MEMBER_DATE}</td>
+							<!-- <td><button type="button" class="btn" onclick="location.href='memberDrop.kly?MEMBER_ID=${member.MEMBER_ID}'">삭제</button></td> -->
+							<td><button type="button" class="btn" onclick="location.href='memberSuspedDelete.kly?MEMBER_ID=${member.MEMBER_ID}'">삭제</button></td>
+							<td><button type="button" class="btn" data-toggle="modal"
+									data-target="#board${member.MEMBER_ID}">정지</button> <!-- The Modal -->
+								<form action="./memberSuspend.kly" method="get"
+									id="memberSuspend" onsubmit="return alertSelectCategory()">
+									<div class="modal fade" id="board${member.MEMBER_ID}">
+										<div class="modal-dialog modal-lg">
+											<div class="modal-content">
+												<input type="text" name="MEMBER_ID"
+													value="${member.MEMBER_ID}">
+												<!-- Modal Header -->
+												<div class="modal-header">
+													<h4 class="modal-title">회원 정지</h4>
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
 												</div>
-											</div>
-
-											<!-- Modal footer -->
-											<div class="modal-footer">
-												<button type="submit" class="btn btn-primary">정지</button>
-												<!-- data-dismiss="modal" -->
+	
+												<!-- Modal body -->
+												<div class="modal-body">
+													<div class="Zform-group" id="category">
+														<!-- <label for="category" style="display: inline;">게시판</label> -->
+														<select class="form-control" name="category"
+															id="selectedCategory">
+															<option value="select" selected="selected">정지일수를
+																선택하세요</option>
+															<option value="7">7일</option>
+															<option value="15">15일</option>
+															<option value="30">1달</option>
+															<option value="99999">영구</option>
+														</select>
+													</div>
+												</div>
+	
+												<!-- Modal footer -->
+												<div class="modal-footer">
+													<button type="submit" class="btn btn-primary">정지</button>
+													<!-- data-dismiss="modal" -->
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</form> <!-- <td><button type="button" class="btn" onclick="location.href='memberSuspend.kly?MEMBER_ID=${member.MEMBER_ID}'">정지</button></td> -->
-						<td><button type="button" class="btn" onclick="location.href='memberSuspedRelieve.kly?MEMBER_ID=${member.MEMBER_ID}'">해제</button></td>
-					</tr>
-				</c:forEach>
-
-			</table>
-			<div style="padding: 10px; text-align: center;">
-				<button type="button" class="btn btn-primary">이전</button>
-				&nbsp;&nbsp;
-				<button type="button" class="btn btn-primary">다음</button>
-				</td>
+								</form> <!-- <td><button type="button" class="btn" onclick="location.href='memberSuspend.kly?MEMBER_ID=${member.MEMBER_ID}'">정지</button></td> -->
+							<td><button type="button" class="btn" onclick="location.href='memberSuspedRelieve.kly?MEMBER_ID=${member.MEMBER_ID}'">해제</button></td>
+						</tr>
+					</c:forEach>
+	
+				</table>
+				<div style="padding: 10px; text-align: center;">
+					<button type="button" class="btn btn-primary">이전</button>
+					&nbsp;&nbsp;
+					<button type="button" class="btn btn-primary">다음</button>
+				</div>
 			</div>
 		</div>
 	</div>
-
 
 	<!-- 하단바(footer) -->
 	<div class="jumbotron text-center">

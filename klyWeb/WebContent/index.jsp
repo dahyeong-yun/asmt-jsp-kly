@@ -3,11 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.*" %>
 <%@ page import="bean.BoardBean" %>
-<%-- <%
-	if(request.getServletPath().equals("/index.jsp")) {
-		response.sendRedirect("./index.kly");
-	}
-%> --%>
 
 <!DOCTYPE html>
 <html>
@@ -31,21 +26,21 @@
 					var out =
 						"<tr>" +
 							"<td>" + arr.value0[0] + "</td>"+
-							"<td><img src=\"" + arr.value0[1] + "\"></td>"+
+							"<td><a href=\"./List.jsp\"><img src=\"" + arr.value0[1] + "\"></a></td>"+
 							"<td>" + arr.value0[2] + "</td>"+
 							"<td>" + arr.value0[3] + "</td>"+
 							"<td>" + 44 + "</td>"+
 						"</tr>" +
 						"<tr>" +
 							"<td>" + arr.value1[0] + "</td>"+
-							"<td><img src=\"" + arr.value1[1] + "\"></td>"+
+							"<td><a href=\"./List.jsp\"><img src=\"" + arr.value1[1] + "\"></a></td>"+
 							"<td>" + arr.value1[2] + "</td>"+
 							"<td>" + arr.value1[3] + "</td>"+
 							"<td>" + 44 + "</td>"+
 						"</tr>" +
 						"<tr>" +
 							"<td>" + arr.value2[0] + "</td>"+
-							"<td><img src=\"" + arr.value2[1] + "\"></td>"+
+							"<td><a href=\"./List.jsp\"><img src=\"" + arr.value2[1] + "\"></a></td>"+
 							"<td>" + arr.value2[2] + "</td>"+
 							"<td>" + arr.value2[3] + "</td>"+
 							"<td>" + 44 + "</td>"+
@@ -67,21 +62,21 @@
 						var out =
 							"<tr>" +
 								"<td>" + arr.value0[0] + "</td>"+
-								"<td><img src=\"" + arr.value0[1] + "\"></td>"+
+								"<td><a href=\"./List.jsp\"><img src=\"" + arr.value0[1] + "\"></a></td>"+
 								"<td>" + arr.value0[2] + "</td>"+
 								"<td>" + arr.value0[3] + "</td>"+
 								"<td>" + 44 + "</td>"+
 							"</tr>" +
 							"<tr>" +
 								"<td>" + arr.value1[0] + "</td>"+
-								"<td><img src=\"" + arr.value1[1] + "\"></td>"+
+								"<td><a href=\"./List.jsp\"><img src=\"" + arr.value1[1] + "\"></a></td>"+
 								"<td>" + arr.value1[2] + "</td>"+
 								"<td>" + arr.value1[3] + "</td>"+
 								"<td>" + 44 + "</td>"+
 							"</tr>" +
 							"<tr>" +
 								"<td>" + arr.value2[0] + "</td>"+
-								"<td><img src=\"" + arr.value2[1] + "\"></td>"+
+								"<td><a href=\"./List.jsp\"><img src=\"" + arr.value2[1] + "\"></a></td>"+
 								"<td>" + arr.value2[2] + "</td>"+
 								"<td>" + arr.value2[3] + "</td>"+
 								"<td>" + 44 + "</td>"+
@@ -96,7 +91,15 @@
 			}
 	</script>
 
-
+	<style>
+		td img {
+			max-width : 120px;
+		}
+		tbody td {
+			vertical-align:center;
+		}
+		
+	</style>
 	<title>kly</title>
 
 </head>
@@ -114,7 +117,7 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-3"></div>
 			<div class="col-lg-4 col-md-6">
-				<form class="form mb-2" action="./List.jsp" method="get" style="max-width:400px;">
+				<form class="form mb-2" action="./boardSearch.kly" method="post" style="max-width:400px;">
 					<div class="form-group">
 						<div class="input-group">
 							<input type="text" class="form-control" name="search" placeholder="검색어를 입력해 주세요.">
@@ -138,15 +141,14 @@
 								조회수 상위 5개 게시물
 							</th>
 						</tr>
-						 <tr style="font-weight: bold;">
-			                <td>번호</td>
-			                <td colspan="2">제목</td>
-			                <td>좋아요</td>
-			                <td>조회수</td>
-			            </tr>
+						<tr style="font-weight: bold;">
+							<td>번호</td>
+							<td colspan="2">제목</td>
+							<td>좋아요</td>
+							<td>조회수</td>
+						</tr>
 					</thead>
-					<tbody id="topReadcountList">
-					</tbody>
+					<tbody id="topReadcountList"></tbody>
 				</table>	
 			</div>
 			
@@ -168,7 +170,7 @@
 						</tr>
 					</thead>
 					
-					<tbody id="topLikedList">
+					<tbody id="topLikedList"></tbody>
 					</table>
 			</div>
 		</div>

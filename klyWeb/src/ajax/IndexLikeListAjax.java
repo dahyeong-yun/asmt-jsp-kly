@@ -34,14 +34,14 @@ public class IndexLikeListAjax implements Ajax {
 			if(i == topLikecountList.size()-1) {
 				result.append("\"value"+ i +"\":"
 						+ "[\"" + topLikecountList.get(i).getBOARD_NUM() +"\","
-						+ "\"https://img.youtube.com/vi/5WCzoESZLTo/3.jpg\"," // https://img.youtube.com/vi/5WCzoESZLTo/3.jpg []링크 추가, [] 관련 DB 변경
+						+ "\"https://img.youtube.com/vi/"+topLikecountList.get(i).getBOARD_YOUTUBE_ID()+"/0.jpg\","
 						+ "\"" + topLikecountList.get(i).getBOARD_SUBJECT() +"\","
 						+ "\"" + topLikecountList.get(i).getBOARD_READCOUNT() +"\"]"
 						);
 			} else {
 				result.append("\"value"+ i +"\":"
 						+ "[\"" + topLikecountList.get(i).getBOARD_NUM() +"\","
-						+ "\"https://img.youtube.com/vi/5WCzoESZLTo/3.jpg\"," // "\"https://img.youtube.com/vi/+"get(i).URL+"/3.jpg\","
+						+ "\"https://img.youtube.com/vi/"+topLikecountList.get(i).getBOARD_YOUTUBE_ID()+"/0.jpg\","
 						+ "\"" + topLikecountList.get(i).getBOARD_SUBJECT() +"\","
 						+ "\"" + topLikecountList.get(i).getBOARD_READCOUNT() +"\"], "
 						);

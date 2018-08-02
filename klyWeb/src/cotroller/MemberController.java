@@ -114,7 +114,6 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
 			// 아이디 중복체크
 		} else if (command.equals("/idOverlapCheck.kly")) {
 			ajax = new IdOverlapCheckAjax();
@@ -124,7 +123,6 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 		} else if (command.equals("/emailAuthAction.kly")) {
 			action = new EmailAuthAction();
 			try {
@@ -338,7 +336,7 @@ public class MemberController extends HttpServlet {
 			}
 		}
 
-		// ActionForward 인스턴스에 따른 forwarding
+		/** 2. ActionForward 인스턴스에 따른 forwarding */
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
@@ -347,7 +345,5 @@ public class MemberController extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
-
 	}
-
 }

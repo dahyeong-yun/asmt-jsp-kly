@@ -115,7 +115,7 @@
 		                                <h5><label>아이디</label></h5>
 		                            	<div class="row">
 											<div class="col-sm-9">
-		                                		<input class="form-control" name="MEMBER_ID" type="text" id="joinId" placeholder="아이디를 입력해 주세요."/>
+		                                		<input class="form-control" name="MEMBER_ID" type="text" maxlength="5" id="joinId" placeholder="아이디를 입력해 주세요."/>
 											</div>
 									
 											<div class="col-sm-3">
@@ -134,7 +134,7 @@
 									
 									<div class="col-sm">
 										<label><h5>비밀번호 확인</h5></label>
-										<input class="form-control" type="password" id="pass2" onkeyup="passCheck()" placeholder="비밀번호를 한번 더  입력해 주세요."/>
+										<input class="form-control" type="password" id="pass2" onkeyup="passCheck()" placeholder="한번 더  입력해 주세요."/>
 									</div>
 									
                                 </div>
@@ -167,7 +167,10 @@
 			console.log("null if문 실행")
 			alert('id를 입력해주세요');
 			return;
+		} else if() {
+			
 		}
+		
 		
  		var req = new XMLHttpRequest();
 		req.onreadystatechange = function() {
@@ -180,7 +183,7 @@
 					overlap = 1;
 					var checkbutton = document.getElementById("checkButton");
 					checkbutton.className += " disabled";
-					checkbutton.disabled = false;
+					id.disabled = true;
 					console.log('버튼 비활성화 완료')
 				}
 			}
