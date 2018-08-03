@@ -132,16 +132,29 @@ body {
 				data-target="#board">게시글 등록</button>
 
 			<!-- 검색기능  태그나 게시글 제목을 입력해 검색할 수 있음-->
-			<form action="./boardSearch.kly" method="post">
+			<form action="./boardSearch.kly" method="post" id="searchForm">
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" placeholder="Search"
-						name="search">
+						name="search" id="search">
 					<div class="input-group-append">
-						<button class="btn btn-success" type="submit">검색</button>
+						<button class="btn btn-success" type="button" onclick="searchCheck()">검색</button>
 					</div>
 				</div>
 			</form>
 		</div>
+		
+		<script>
+		function searchCheck() {
+			var search = document.getElementById("search");
+			if(search.value == "") {
+				alert('검색 값을 입력해주세요.')
+			} else {
+				document.getElementById("searchForm").submit();
+			}
+		}
+		
+		
+		</script>
 		<!-- 조회 수,추천 수 중 정렬기준을 정하는 기능 array와 category 값을 같이넘겨서 카테고리 내에서도 정렬 기준을 선택 할 수 있음(전체목록 정렬이 안됨)-->
 		<div class="main" id="rightbody"
 			style="height: 100%; width: 1670px; float: right; overflow-x: auto;">
