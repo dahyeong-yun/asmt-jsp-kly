@@ -578,12 +578,14 @@ public class BoardDAO {
 	public int boardDelete(BoardBean boardBean) {
 
 		String sql1 = "SELECT * FROM REPORT WHERE BOARD_NUM=?";
-		String sql2 = "SELECT * FROM BOARD_COMMENT WHERE BOARD_NUM=?";
-		String sql3 = "SELECT * FROM BOARD WHERE BOARD_NUM=?";
+		String sql2 = "SELECT * FROM LIKED WHERE BOARD_NUM=?";
+		String sql3 = "SELECT * FROM BOARD_COMMENT WHERE BOARD_NUM=?";
+		String sql4 = "SELECT * FROM BOARD WHERE BOARD_NUM=?";
 
 		String sql11 = "DELETE FROM REPORT WHERE BOARD_NUM=?";
-		String sql12 = "DELETE FROM BOARD_COMMENT WHERE BOARD_NUM=?";
-		String sql13 = "DELETE FROM BOARD WHERE BOARD_NUM=?";
+		String sql12 = "DELETE FROM LIKED WHERE BOARD_NUM=?";
+		String sql13 = "DELETE FROM BOARD_COMMENT WHERE BOARD_NUM=?";
+		String sql14 = "DELETE FROM BOARD WHERE BOARD_NUM=?";
 		
 		int selectResult = 0;
 		int deleteResult = 0;
@@ -616,6 +618,16 @@ public class BoardDAO {
 				deleteResult = pstmt.executeUpdate();
 				selectResult = 0;
 			}
+			pstmt = con.prepareStatement(sql4);
+			pstmt.setInt(1, boardBean.getBOARD_NUM());
+			selectResult = pstmt.executeUpdate();
+			if (selectResult != 0) {
+				pstmt = con.prepareStatement(sql14);
+				pstmt.setInt(1, boardBean.getBOARD_NUM());
+				deleteResult = pstmt.executeUpdate();
+				selectResult = 0;
+			}
+			
 			
 		} catch (Exception e) {
 			System.out.println("deleteMember 오류" + e);
@@ -811,11 +823,13 @@ public class BoardDAO {
 
 		String sql1 = "SELECT * FROM REPORT WHERE BOARD_NUM=?";
 		String sql2 = "SELECT * FROM BOARD_COMMENT WHERE BOARD_NUM=?";
-		String sql3 = "SELECT * FROM BOARD WHERE BOARD_NUM=?";
+		String sql3 = "SELECT * FROM BOARD_COMMENT WHERE BOARD_NUM=?";
+		String sql4 = "SELECT * FROM BOARD WHERE BOARD_NUM=?";
 
 		String sql11 = "DELETE FROM REPORT WHERE BOARD_NUM=?";
-		String sql12 = "DELETE FROM BOARD_COMMENT WHERE BOARD_NUM=?";
-		String sql13 = "DELETE FROM BOARD WHERE BOARD_NUM=?";
+		String sql12 = "DELETE FROM REPORT WHERE BOARD_NUM=?";
+		String sql13 = "DELETE FROM BOARD_COMMENT WHERE BOARD_NUM=?";
+		String sql14 = "DELETE FROM BOARD WHERE BOARD_NUM=?";
 		
 		int selectResult = 0;
 		int deleteResult = 0;
@@ -844,6 +858,15 @@ public class BoardDAO {
 			selectResult = pstmt.executeUpdate();
 			if (selectResult != 0) {
 				pstmt = con.prepareStatement(sql13);
+				pstmt.setInt(1, delNum);
+				deleteResult = pstmt.executeUpdate();
+				selectResult = 0;
+			}
+			pstmt = con.prepareStatement(sql4);
+			pstmt.setInt(1, delNum);
+			selectResult = pstmt.executeUpdate();
+			if (selectResult != 0) {
+				pstmt = con.prepareStatement(sql14);
 				pstmt.setInt(1, delNum);
 				deleteResult = pstmt.executeUpdate();
 				selectResult = 0;

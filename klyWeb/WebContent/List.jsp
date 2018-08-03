@@ -9,9 +9,10 @@
 <html lang="en">
 <head>
 <style>
-body{
-	overflow-x:auto;
+body {
+	overflow-x: auto;
 }
+
 #leftbody {
 	padding: 5px;
 }
@@ -34,7 +35,6 @@ body{
 .view {
 	float: left;
 }
-
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -125,12 +125,12 @@ body{
 			<button type="button" class="btn btn-outline-info"
 				style="width: 95%; margin: 5px 5px 80px 5px;" id="category"
 				onclick="location='boardCategory.kly?category=기타'">기타</button>
-			
-			
+
+
 			<button type="button" class="btn btn-outline-info"
-				style="width: 95%;" id="register"
-				data-toggle="modal" data-target="#board" >게시글 등록</button>
-				
+				style="width: 95%;" id="register" data-toggle="modal"
+				data-target="#board">게시글 등록</button>
+
 			<!-- 검색기능  태그나 게시글 제목을 입력해 검색할 수 있음-->
 			<form action="./boardSearch.kly" method="post">
 				<div class="input-group mb-3">
@@ -144,7 +144,7 @@ body{
 		</div>
 		<!-- 조회 수,추천 수 중 정렬기준을 정하는 기능 array와 category 값을 같이넘겨서 카테고리 내에서도 정렬 기준을 선택 할 수 있음(전체목록 정렬이 안됨)-->
 		<div class="main" id="rightbody"
-			style="height: 100%; width: 1670px; float: right; overflow-x:auto;">
+			style="height: 100%; width: 1670px; float: right; overflow-x: auto;">
 			<div class="dropdown">
 				<button type="button"
 					class="btn btn-outline-primary dropdown-toggle"
@@ -186,13 +186,15 @@ body{
 									<div>
 										<img class="btn-img" src="./images/like.png"
 											onclick="location='boardLike.kly?board_num=${board.BOARD_NUM}&member_id=${loginInfo.MEMBER_ID}'">
-											<span style="color:blue">${board.BOARD_LIKECOUNT}</span>
-										<div class="btn-group" style="text-align: right">
+										<span style="color: blue">${board.BOARD_LIKECOUNT}</span>
+										<div class="btn-group" style="text-align: right; width: 420px">
 											<img class="btn-img" src="./images/report.jpg"
 												onclick="location='boardReport.kly?board_num=${board.BOARD_NUM}&member_id=${loginInfo.MEMBER_ID}'">
-											<img class="btn-img" src="./images/delete.png"
+											 &nbsp;<img class="btn-img" src="./images/delete.png"
 												onclick="location='boardDelete.kly?board_num=${board.BOARD_NUM}&member_id=${loginInfo.MEMBER_ID}'">
 										</div>
+										<span style="color: cadetblue;"><img
+											src="./images/tag.png">#${board.BOARD_TAG }</span>
 									</div>
 								</div>
 								<div>
@@ -232,10 +234,11 @@ body{
 						<tr>
 					</c:if>
 					<td>
-						<div class="card" id="card" style="height:220px">
+						<div class="card" id="card" style="height: 220px">
 							<div class="card-body text-center">
 								<div class="videoplay">
-									<img class="btn-img" src="https://img.youtube.com/vi/${board.BOARD_YOUTUBE_ID}/0.jpg"
+									<img class="btn-img"
+										src="https://img.youtube.com/vi/${board.BOARD_YOUTUBE_ID}/0.jpg"
 										style="width: 200px; height: 120px;"
 										onclick="document.getElementById('id0${status.count}').style.display='block'">
 									<div>
@@ -249,7 +252,9 @@ body{
 											class="videoReadCount"><img src="./images/view.jpg">${board.BOARD_READCOUNT}</span>
 									</div>
 									<div>
-										<span class="videoUptime">${board.BOARD_DATE}</span>
+										<span class="videoUptime">${board.BOARD_DATE}</span> <span
+											class="videoTag" style="color: cadetblue"><img
+											src="./images/tag.png">#${board.BOARD_TAG}</span>
 									</div>
 								</div>
 							</div>
@@ -263,107 +268,114 @@ body{
 			</table>
 		</div>
 	</div>
-	
+
 	<!-- List페이지의 동영상게시 갯수를 누를때 마다 늘린다. 미구현  -->
 	<%-- <div class="js-btn" id="btn">
 		<input type="hidden" id="more" name="more" value="${more}">
 		<button type="button" class="btn btn-default btn-sm btn-block"
 			onclick="javascript:;" id="more">더보기</button>
 	</div> --%>
-	
+
 	<!-- 게시글 등록 -->
-        <form action="./boardWrite.kly" method="get" id="boardWrite" onsubmit="return alertSelectCategory()">
-            <div class="modal fade" id="board">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
+	<form action="./boardWrite.kly" method="get" id="boardWrite"
+		onsubmit="return alertSelectCategory()">
+		<div class="modal fade" id="board">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
 
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Modal Heading</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Modal Heading</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
 
-                        <!-- Modal body -->
-                      <div class="modal-body">
-							<div class="form-group" id="category">
- 								<label for="category" style="display:inline;">분류</label>
-								<select class="form-control" name="category" id="selectedCategory">
-									<option value = "select" selected="selected">분류를 선택하세요</option><!-- '게시판을 선택하세요'입력하면 alert : '게시판을 선택하세요' --> 
-									<option value = "유머">유머</option>
-									<option value = "정보">정보</option>
-									<option value = "게임">게임</option>
-									<option value = "감동">감동</option>
-									<option value = "스포츠">스포츠</option>
-									<option value = "취미">취미</option>
-									<option value = "동물">동물</option>
-									<option value = "기타">기타</option>
-								</select>
-                            </div>
-						
-							<input type = hidden name="ID" value="${loginInfo.getMEMBER_ID()}">
-                        
-                            <div id="subject">
-                                <label for="subject" style="display:inline;">제목</label>
-                                <input type="text" class="form-control" name="subject" placeholder="게시글 제목을 입력하세요" required>
-                            </div>
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div class="form-group" id="category">
+							<label for="category" style="display: inline;">분류</label> <select
+								class="form-control" name="category" id="selectedCategory">
+								<option value="select" selected="selected">분류를 선택하세요</option>
+								<!-- '게시판을 선택하세요'입력하면 alert : '게시판을 선택하세요' -->
+								<option value="유머">유머</option>
+								<option value="정보">정보</option>
+								<option value="게임">게임</option>
+								<option value="감동">감동</option>
+								<option value="스포츠">스포츠</option>
+								<option value="취미">취미</option>
+								<option value="동물">동물</option>
+								<option value="기타">기타</option>
+							</select>
+						</div>
 
-                            <div id="video">
-                                <label for="video_upload">동영상 올리기</label>
-                                <input type = "radio" id="video_upload" name="videoFile" value="upload" onclick="switchDisplay('input_upload');">
-                                
-                                <label for="video">URL</label>
-                                <input type="radio" id="video_URL" name="videoURL" value="url" onclick="switchDisplay('input_url');">
+						<input type=hidden name="ID" value="${loginInfo.getMEMBER_ID()}">
 
-                                <div id="input_upload" style="display:none">
-                                    <input type="file" name="file">
-                                </div>
+						<div id="subject">
+							<label for="subject" style="display: inline;">제목</label> <input
+								type="text" class="form-control" name="subject"
+								placeholder="게시글 제목을 입력하세요" required>
+						</div>
 
-                                <div id="input_url" style="display:none">
-                                    <input type="url" class="form-control" name="video_URL"  value="http://">
-                                </div>
-                            </div>
+						<div id="video">
+							<label for="video_upload">동영상 올리기</label> <input type="radio"
+								id="video_upload" name="videoFile" value="upload"
+								onclick="switchDisplay('input_upload');"> <label
+								for="video">URL</label> <input type="radio" id="video_URL"
+								name="videoURL" value="url"
+								onclick="switchDisplay('input_url');">
+
+							<div id="input_upload" style="display: none">
+								<input type="file" name="file">
+							</div>
+
+							<div id="input_url" style="display: none">
+								<input type="url" class="form-control" name="video_URL"
+									value="http://">
+							</div>
+						</div>
 
 
-                            <div id="tag">
-                                <label for="tag">태그</label>
-                                <input type="text"  class="form-control" name="tag" placeholder="태그와 태그는 해쉬태그로 구분하며, 10개까지 입력하실 수 있습니다.">
-                                <!-- <input type="text" name="tagnames" id="tagnames" class="box_input _click(TagValidator|TagNames) _keyup(TagValidator|ValidateTagNames) _blur(TagValidator|ValidateTagNames)"> -->
-                            </div>
+						<div id="tag">
+							<label for="tag">태그</label> <input type="text"
+								class="form-control" name="tag"
+								placeholder="태그와 태그는 해쉬태그로 구분하며, 10개까지 입력하실 수 있습니다.">
+							<!-- <input type="text" name="tagnames" id="tagnames" class="box_input _click(TagValidator|TagNames) _keyup(TagValidator|ValidateTagNames) _blur(TagValidator|ValidateTagNames)"> -->
+						</div>
 
-                        </div>
+					</div>
 
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">등록</button><!-- data-dismiss="modal" -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        
-<script>
-	function alertSelectCategory() {
-		var whatCategory = document.getElementById("selectedCategory");
-		if (whatCategory.value == "select") {
-			alert('게시판을 선택하세요.');
-			document.getElementById("category").focus();
-			return false;
-		} else {
-			return true;
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">등록</button>
+						<!-- data-dismiss="modal" -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<script>
+		function alertSelectCategory() {
+			var whatCategory = document.getElementById("selectedCategory");
+			if (whatCategory.value == "select") {
+				alert('게시판을 선택하세요.');
+				document.getElementById("category").focus();
+				return false;
+			} else {
+				return true;
+			}
 		}
-	}
 
-    /*동영상 첨부 방식선택*/
-    function switchDisplay(select) {
-        if (select == "input_upload") {
-            document.getElementById("input_upload").style.display = "";
-            document.getElementById("input_url").style.display = 'none';
-        } else {
-             document.getElementById("input_upload").style.display = 'none';
-            document.getElementById("input_url").style.display = "";
-        }
-    }
-</script>
+		/*동영상 첨부 방식선택*/
+		function switchDisplay(select) {
+			if (select == "input_upload") {
+				document.getElementById("input_upload").style.display = "";
+				document.getElementById("input_url").style.display = 'none';
+			} else {
+				document.getElementById("input_upload").style.display = 'none';
+				document.getElementById("input_url").style.display = "";
+			}
+		}
+	</script>
 
 </body>
 </html>
