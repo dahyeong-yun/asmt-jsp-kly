@@ -43,13 +43,17 @@
                         <!-- Modal body -->
                         <div class="modal-body">
 							<div class="form-group" id="category">
- 								<label for="category" style="display:inline;">게시판</label>
+ 								<label for="category" style="display:inline;">분류</label>
 								<select class="form-control" name="category" id="selectedCategory">
-									<option value = "select" selected="selected">게시판을 선택하세요</option><!-- '게시판을 선택하세요'입력하면 alert : '게시판을 선택하세요' --> 
-									<option value = "free" >자유</option>
-									<option value = "pubg">배그</option>
-									<option value = "lol">롤</option>
-									<option value = "animal">동물</option>
+									<option value = "select" selected="selected">분류를 선택하세요</option><!-- '게시판을 선택하세요'입력하면 alert : '게시판을 선택하세요' --> 
+									<option value = "">유머</option>
+									<option value = "">정보</option>
+									<option value = "">게임</option>
+									<option value = "">감동</option>
+									<option value = "">스포츠</option>
+									<option value = "">동물</option>
+									<option value = "">동물</option>
+									<option value = "">동물</option>
 								</select>
                             </div>
 						

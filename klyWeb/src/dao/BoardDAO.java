@@ -134,12 +134,15 @@ public class BoardDAO {
 			pstmt.setString(1, boardBean.getMEMBER_ID());
 			pstmt.setInt(2, num); // 글 번호
 			pstmt.setString(3, boardBean.getBOARD_SUBJECT());
-			pstmt.setString(4, boardBean.getBOARD_VIDEO_URL());
-			pstmt.setInt(5, 0); // 조회 수
-			pstmt.setInt(6, 0); // 추천수
-			pstmt.setInt(7, 0); // 신고 수
-			pstmt.setString(8, boardBean.getBOARD_TAG());
-			pstmt.setString(9, boardBean.getBOARD_CATEGORY());
+			pstmt.setString(4, boardBean.getBOARD_VIDEO_FILE());
+			pstmt.setString(5, boardBean.getBOARD_VIDEO_URL());
+			pstmt.setInt(6, 0); // 조회 수
+			pstmt.setInt(7, 0); // 추천수
+			pstmt.setInt(8, 0); // 신고 수
+			pstmt.setString(9, boardBean.getBOARD_TAG());
+			pstmt.setString(10, boardBean.getBOARD_CATEGORY());
+			pstmt.setInt(11, 0);
+			pstmt.setString(12, );
 			
 			//쿼리문 실행
 			insertResult = pstmt.executeUpdate();
@@ -475,9 +478,9 @@ public class BoardDAO {
 				num=1;
 			}
 			pstmt = con.prepareStatement(sql2);
-			pstmt.setInt(1, num);
-			pstmt.setString(2, reportBean.getMEMBER_ID()); //객체로부터 받아온값 저장
-			pstmt.setInt(3, reportBean.getBOARD_NUM());
+			pstmt.setString(1, reportBean.getMEMBER_ID());
+			pstmt.setInt(2, reportBean.getBOARD_NUM()); //객체로부터 받아온값 저장
+			pstmt.setInt(3, num);
 			reportResult = pstmt.executeUpdate();
 			System.out.println("신고>>>");
 		}catch(Exception e) {
@@ -514,10 +517,10 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				ReportBean report = new ReportBean();
-				report.setREPORT_NUM(rs.getInt(1));
-				report.setMEMBER_ID(rs.getString(2));
-				report.setBOARD_NUM(rs.getInt(3));
-				report.setREPORT_DATE(rs.getDate(4));
+				report.setMEMBER_ID(rs.getString("MEMBER_ID"));
+				report.setBOARD_NUM(rs.getInt("BOARD_NUM"));
+				report.setREPORT_NUM(rs.getInt("REPORT_NUM"));
+				report.setREPORT_DATE(rs.getDate("REPORT_DATE"));
 				reportList.add(report);
 			}
 		}catch(Exception e) {
@@ -533,7 +536,7 @@ public class BoardDAO {
 	public int likeAdd (LikeBean likeBean) {
 		int likeResult = 0;
 		int num = 0;
-		String sql1 = "SELECT * FROM LIKED";
+		String sql1 = "SELECT MAX(LIKE_NUM) FROM LIKED";
 		String sql2 = "INSERT INTO LIKED VALUES(?,?,?)";
 		try {
 			pstmt = con.prepareStatement(sql1);
@@ -577,20 +580,53 @@ public class BoardDAO {
 	
 	public int boardDelete(BoardBean boardBean) {
 
-		String sql = "DELETE BOARD WHERE BOARD_NUM=?";
-		System.out.println(boardBean.getBOARD_NUM());
-		int deleteReuslt = 0;
+		String sql1 = "SELECT * FROM REPORT WHERE BOARD_NUM=?";
+		String sql2 = "SELECT * FROM BOARD_COMMENT WHERE BOARD_NUM=?";
+		String sql3 = "SELECT * FROM BOARD WHERE BOARD_NUM=?";
+
+		String sql11 = "DELETE FROM REPORT WHERE BOARD_NUM=?";
+		String sql12 = "DELETE FROM BOARD_COMMENT WHERE BOARD_NUM=?";
+		String sql13 = "DELETE FROM BOARD WHERE BOARD_NUM=?";
+		
+		int selectResult = 0;
+		int deleteResult = 0;
+		
 		try {
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql1);
 			pstmt.setInt(1, boardBean.getBOARD_NUM());
-			deleteReuslt = pstmt.executeUpdate();
-			System.out.println("dao 삭제완료");
-		}catch(Exception e){
-			System.out.println("삭제 오류"+e);
-		}finally {
+			selectResult = pstmt.executeUpdate();
+			if (selectResult != 0) {
+				pstmt = con.prepareStatement(sql11);
+				pstmt.setInt(1, boardBean.getBOARD_NUM());
+				deleteResult = pstmt.executeUpdate();
+				selectResult = 0;
+			}
+			pstmt = con.prepareStatement(sql2);
+			pstmt.setInt(1, boardBean.getBOARD_NUM());
+			selectResult = pstmt.executeUpdate();
+			if (selectResult != 0) {
+				pstmt = con.prepareStatement(sql12);
+				pstmt.setInt(1, boardBean.getBOARD_NUM());
+				deleteResult = pstmt.executeUpdate();
+				selectResult = 0;
+			}
+			pstmt = con.prepareStatement(sql3);
+			pstmt.setInt(1, boardBean.getBOARD_NUM());
+			selectResult = pstmt.executeUpdate();
+			if (selectResult != 0) {
+				pstmt = con.prepareStatement(sql13);
+				pstmt.setInt(1, boardBean.getBOARD_NUM());
+				deleteResult = pstmt.executeUpdate();
+				selectResult = 0;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("deleteMember 오류" + e);
+		} finally {
 			close(pstmt);
 		}
-		return deleteReuslt;
+
+		return deleteResult;
 	}
 	public ArrayList<BoardBean> listSearch(BoardBean search) {
 		String sql = "SELECT * FROM BOARD WHERE BOARD_SUBJECT LIKE ? OR BOARD_TAG LIKE ?";

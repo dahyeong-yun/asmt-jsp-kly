@@ -36,20 +36,20 @@ public class BoardDeleteAction implements Action {
 					boardDeleteService.deleteService(boardBean); // 삭제할 게시글 번호와 db에서 받아온 게시글 번호 비교 하고
 					out.println("<script>"); // 로그인중인 id와 db에서 받아온 작성자 id 비교
 					out.println("alert('삭제되었습니다.');");
-					out.println("location.href='./List.jsp';");
+					out.println("location.href='./boardList.kly';");
 					out.println("</script>");
 				}else {
 					deleteResult = false;
 					out.println("<script>");
 					out.println("alert('삭제 권한이 없습니다.');");
-					out.println("location.href='./List.jsp';");
+					out.println("location.href='./boardList.kly';");
 					out.println("</script>");
 				}
 			}
 		}
 		out.println("<script>");
 		out.println("alert('삭제 권한이 없습니다.');");
-		out.println("location.href='./List.jsp';");
+		out.println("location.href='./boardList.kly';");
 		out.println("</script>");
 		return actionForward;
 	}

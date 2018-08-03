@@ -9,6 +9,9 @@
 <html lang="en">
 <head>
 <style>
+body{
+	overflow-x:auto;
+}
 #leftbody {
 	padding: 5px;
 }
@@ -32,17 +35,6 @@
 	float: left;
 }
 
-.card.active {
-	display: block;
-}
-
-.is_comp.card:after {
-	display: none;
-}
-
-.btn btn-default btn-sm btn-block, .main, .video {
-	display: block;
-}
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,11 +93,11 @@
 	<!-- 상단바(footer) -->
 	<%@include file="./navbarTemplate.jsp"%>
 	<!--리스트 페이지의 몸통부분 -->
-	<div class="main" style="height: 1080px; width: 1920px">
+	<div class="main" style="height: 100%; width: 1920px">
 		<!--몸통부분의 왼쪽 부분으로 동영상을 분류 별로 선택해서 보는 기능 으로 
 	category 값을 BoardCategoryAction 으로 넘김  -->
 		<div class="bg-light" id="leftbody"
-			style="height: 1080px; width: 250px; float: left;">
+			style="height: 100%; width: 250px; float: left;">
 			<button type="button" class="btn btn-outline-info"
 				style="width: 95%;" id="category"
 				onclick="location='boardList.kly?'">전체보기</button>
@@ -152,7 +144,7 @@
 		</div>
 		<!-- 조회 수,추천 수 중 정렬기준을 정하는 기능 array와 category 값을 같이넘겨서 카테고리 내에서도 정렬 기준을 선택 할 수 있음(전체목록 정렬이 안됨)-->
 		<div class="main" id="rightbody"
-			style="height: 1080px; width: 1670px; float: right">
+			style="height: 100%; width: 1670px; float: right; overflow-x:auto;">
 			<div class="dropdown">
 				<button type="button"
 					class="btn btn-outline-primary dropdown-toggle"
@@ -180,7 +172,7 @@
 									<span style="font-size: 25px;">&nbsp;${board.BOARD_SUBJECT}</span>
 									<span style="color: skyblue">&nbsp;&nbsp;${board.MEMBER_ID}</span>
 								</div>
-								<div>${board.BOARD_VIDEO_URL}</div>
+								<div><iframe width="420" height="315" src="https://www.youtube.com/embed/${board.BOARD_YOUTUBE_ID}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
 							</div>
 						</div>
 						<div class="view"
@@ -233,7 +225,7 @@
 				</div>
 			</c:forEach>
 			<c:set var="i" value="0" />
-			<c:set var="j" value="4" />
+			<c:set var="j" value="5" />
 			<table id="video">
 				<c:forEach var="board" items="${boardlist}" varStatus="status">
 					<c:if test="${i%j == 0 }">
@@ -243,7 +235,7 @@
 						<div class="card" id="card" style="height:220px">
 							<div class="card-body text-center">
 								<div class="videoplay">
-									<img class="btn-img" src="./images/Lighthouse.jpg"
+									<img class="btn-img" src="https://img.youtube.com/vi/${board.BOARD_YOUTUBE_ID}/0.jpg"
 										style="width: 200px; height: 120px;"
 										onclick="document.getElementById('id0${status.count}').style.display='block'">
 									<div>
@@ -273,11 +265,11 @@
 	</div>
 	
 	<!-- List페이지의 동영상게시 갯수를 누를때 마다 늘린다. 미구현  -->
-	<div class="js-btn" id="btn">
-		<%-- <input type="hidden" id="more" name="more" value="${more}"> --%>
+	<%-- <div class="js-btn" id="btn">
+		<input type="hidden" id="more" name="more" value="${more}">
 		<button type="button" class="btn btn-default btn-sm btn-block"
 			onclick="javascript:;" id="more">더보기</button>
-	</div>
+	</div> --%>
 	
 	<!-- 게시글 등록 -->
         <form action="./boardWrite.kly" method="get" id="boardWrite" onsubmit="return alertSelectCategory()">
@@ -292,15 +284,19 @@
                         </div>
 
                         <!-- Modal body -->
-                        <div class="modal-body">
+                      <div class="modal-body">
 							<div class="form-group" id="category">
- 								<label for="category" style="display:inline;">게시판</label>
+ 								<label for="category" style="display:inline;">분류</label>
 								<select class="form-control" name="category" id="selectedCategory">
-									<option value = "select" selected="selected">게시판을 선택하세요</option><!-- '게시판을 선택하세요'입력하면 alert : '게시판을 선택하세요' --> 
-									<option value = "free" >자유</option>
-									<option value = "pubg">배그</option>
-									<option value = "lol">롤</option>
-									<option value = "animal">동물</option>
+									<option value = "select" selected="selected">분류를 선택하세요</option><!-- '게시판을 선택하세요'입력하면 alert : '게시판을 선택하세요' --> 
+									<option value = "유머">유머</option>
+									<option value = "정보">정보</option>
+									<option value = "게임">게임</option>
+									<option value = "감동">감동</option>
+									<option value = "스포츠">스포츠</option>
+									<option value = "취미">취미</option>
+									<option value = "동물">동물</option>
+									<option value = "기타">기타</option>
 								</select>
                             </div>
 						

@@ -37,7 +37,7 @@ public class BoardCategoryAction implements Action{
 		}
 		out.println("<script>"); // List에서 누른 category에 DB에 저장된 것이 없는 경우
 		out.println("alert('해당 카테고리에 동영상이 없습니다.');");
-		out.println("location.href='./List.jsp';");	
+		out.println("location.href='./boardList.kly';");
 		out.println("</script>");
 		return actionForward;
 	}

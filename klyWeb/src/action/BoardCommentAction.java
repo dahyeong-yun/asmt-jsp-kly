@@ -17,11 +17,16 @@ public class BoardCommentAction implements Action{
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
 		String member_id = request.getParameter("member_id");
 		CommentBean commentBean = new CommentBean();
-		
+		PrintWriter out = response.getWriter();
 		commentBean.setBOARD_NUM(board_num);
 		commentBean.setCOMMENT_CON(comment);
 		commentBean.setMEMBER_ID(member_id);
-		
+		if (member_id.equals("")) {
+			out.println("<script>");
+			out.println("alert('로그인을 해주세요.');"); // 비로그인시 로그인창으로 이동
+			out.println("location.href='./boardList.kly';");
+			out.println("</script>");
+		}
 		boolean CommentResult = false;
 		BoardCommentService boardCommentService = new BoardCommentService();
 		CommentResult = boardCommentService.BoardCommentService(commentBean);
@@ -31,10 +36,9 @@ public class BoardCommentAction implements Action{
 		ActionForward actionForward = null;
 		if(CommentResult == false) {
 			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('board comment action 오류!!');");
-			out.println("history.back();");
+			out.println("location.href='./boardList.kly';");
 			out.println("</script>");
 		}else {
 			actionForward = new ActionForward();
