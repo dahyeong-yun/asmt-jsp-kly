@@ -114,10 +114,7 @@ public class BoardDAO {
 		int num = 0;
 		int insertResult = 0;
 		String sql1 = "SELECT MAX(BOARD_NUM) FROM BOARD";
-		String sql2 = "INSERT INTO BOARD ("
-				+ "MEMBER_ID, BOARD_NUM, BOARD_SUBJECT, BOARD_DATE, BOARD_URL, BOARD_READCOUNT,"
-				+ "BOARD_LIKECOUNT, BOARD_BLIND, BOARD_TAG, BOARD_CATEGORY) "
-				+ "VALUES (?,?,?,SYSDATE,?,?,?,?,?,?)";
+		String sql2 = "INSERT INTO BOARD VALUES (?,?,?,SYSDATE,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			//글번호를 1씩 증가시키기위한 쿼리문
@@ -142,7 +139,7 @@ public class BoardDAO {
 			pstmt.setString(9, boardBean.getBOARD_TAG());
 			pstmt.setString(10, boardBean.getBOARD_CATEGORY());
 			pstmt.setInt(11, 0);
-			pstmt.setString(12, );
+			pstmt.setString(12, boardBean.getBOARD_YOUTUBE_ID());
 			
 			//쿼리문 실행
 			insertResult = pstmt.executeUpdate();

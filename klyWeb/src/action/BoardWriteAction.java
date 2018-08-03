@@ -35,13 +35,18 @@ public class BoardWriteAction implements Action {
 			memberBean = (MemberBean) session.getAttribute("loginInfo");
 		}
 		
-		/** */
+		String URL =request.getParameter("video_URL");
+		String youtube_id = URL.substring(17, URL.length());
+		System.out.println(youtube_id);
+		String vedio = "<iframe width='560' height='450' src=\"https://www.youtube.com/embed/"+youtube_id+"\" frameborder='1' allow='autoplay; encrypted-media' allowfullscreen></iframe>";		
+			/** */
 		boardBean.setMEMBER_ID(memberBean.getMEMBER_ID());
 		boardBean.setBOARD_SUBJECT(request.getParameter("subject"));
-		boardBean.setBOARD_VIDEO_URL(request.getParameter("videoURL"));
+		boardBean.setBOARD_VIDEO_URL(vedio);
 		boardBean.setBOARD_TAG(request.getParameter("tag"));
 		boardBean.setBOARD_CATEGORY(request.getParameter("category"));
-		
+		boardBean.setBOARD_YOUTUBE_ID(youtube_id);
+
 		boolean boardResult = false;
 		
 		BoardWriteService boardWriteService = new BoardWriteService();

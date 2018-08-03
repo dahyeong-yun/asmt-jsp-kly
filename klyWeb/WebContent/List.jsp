@@ -168,17 +168,17 @@ body{
 						<div class="view" style="width: 40%">
 							<div class="list-group" style="float: right">
 								<div class="bg-light rounded-top"
-									style="border: 1px solid; height: 32px; width: 420px;">
+									style="border: 1px solid; height: 32px; width: 560px;">
 									<span style="font-size: 25px;">&nbsp;${board.BOARD_SUBJECT}</span>
 									<span style="color: skyblue">&nbsp;&nbsp;${board.MEMBER_ID}</span>
 								</div>
-								<div><iframe width="420" height="315" src="https://www.youtube.com/embed/${board.BOARD_YOUTUBE_ID}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+								<div>${board.BOARD_VIDEO_URL}</div>
 							</div>
 						</div>
 						<div class="view"
-							style="position: relative; width: 58%; height: 360px">
+							style="position: relative; width: 58%; height: 494px">
 							<div class="bg-light rounded"
-								style="width: 400px; height: 315px; border: 1px solid">
+								style="width: 560px; height: 480px; border: 1px solid">
 								<div style="border-bottom: 1px solid">
 									<!--하나의 게시물에 계정당 한번의 추천 , 신고를 할 수 있음 , 자신의 게시물만 삭제 할 수 있음 
 		 								게시번호 값과 로그인한 계정의 id 값을 넘겨 비교해 이미 추천,신고를 한번 했으면 더이상 못함
@@ -210,7 +210,7 @@ body{
 											action="./boardComment.kly?board_num=${board.BOARD_NUM}&member_id=${loginInfo.MEMBER_ID}"
 											method="post">
 											<div class="input-group mb-3"
-												style="width: 398px; position: absolute; bottom: 0px; margin-left: 1px">
+												style="width: 556px; position: absolute; bottom: 0px; margin-left: 1px">
 												<input type="text" class="form-control" name="comment">
 												<div class="input-group-append">
 													<button class="btn btn-success" type="submit">등록</button>
@@ -311,7 +311,7 @@ body{
                                 <label for="video_upload">동영상 올리기</label>
                                 <input type = "radio" id="video_upload" name="videoFile" value="upload" onclick="switchDisplay('input_upload');">
                                 
-                                <label for="video_URL">URL</label>
+                                <label for="video">URL</label>
                                 <input type="radio" id="video_URL" name="videoURL" value="url" onclick="switchDisplay('input_url');">
 
                                 <div id="input_upload" style="display:none">
@@ -319,7 +319,7 @@ body{
                                 </div>
 
                                 <div id="input_url" style="display:none">
-                                    <input type="url" class="form-control" name="link" value="http://">
+                                    <input type="url" class="form-control" name="video_URL"  value="http://">
                                 </div>
                             </div>
 
