@@ -115,7 +115,7 @@
 		                                <h5><label>아이디</label></h5>
 		                            	<div class="row">
 											<div class="col-sm-9">
-		                                		<input class="form-control" name="MEMBER_ID" type="text" maxlength="5" id="joinId" placeholder="아이디를 입력해 주세요."/>
+		                                		<input class="form-control" name="MEMBER_ID" type="text" maxlength="5" id="joinId" placeholder="아이디를 입력해 주세요." />
 											</div>
 									
 											<div class="col-sm-3">
@@ -157,7 +157,7 @@
 <script>
 	var overlap = 0; // 0  중복체크 안함, 1 했고 중복 안됌
 	var passConfirm = 0;
-	
+
 	/* 아이디 중복체크 */
 	function idCheck() {
 		var id = document.getElementById("joinId");
@@ -167,10 +167,11 @@
 			console.log("null if문 실행")
 			alert('id를 입력해주세요');
 			return;
-		} else if() {
-			
+		} else if(id.value.match(/[가-힣ㄱ-ㅎ]/)) {
+			alert('아이디는 한글을 제외해 주세요.');
+			return;
 		}
-		
+	
 		
  		var req = new XMLHttpRequest();
 		req.onreadystatechange = function() {
@@ -180,7 +181,7 @@
 					alert('아이디가 존재합니다.');
 				} else {
 					alert('사용 가능한 아이디 입니다.');
-					overlap = 1;
+					overlap = 1; // 중복체크 완료
 					var checkbutton = document.getElementById("checkButton");
 					checkbutton.className += " disabled";
 					id.disabled = true;
