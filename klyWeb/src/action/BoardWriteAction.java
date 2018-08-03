@@ -5,19 +5,38 @@ import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.ActionForward;
 import bean.BoardBean;
+import bean.MemberBean;
 import service.BoardWriteService;
 
 public class BoardWriteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		
 		BoardBean boardBean = new BoardBean();
 		
-		//boardBean.setMEMBER_ID(request.getParameter("ID"));
-		boardBean.setMEMBER_ID("tempId");
+		/** 비 로그인 사용자의 게시물 등록 시도에 대한 처리 */
+		HttpSession session = request.getSession();
+		MemberBean memberBean = null;
+		if(session.getAttribute("loginInfo")==null) {
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 한 사용자만 게시물 등록이 가능합니다.');");
+			out.println("location.href='./boardList.kly';");
+			out.println("</script>");
+		} else {
+			memberBean = (MemberBean) session.getAttribute("loginInfo");
+		}
+		
+		/** */
+		boardBean.setMEMBER_ID(memberBean.getMEMBER_ID());
 		boardBean.setBOARD_SUBJECT(request.getParameter("subject"));
 		boardBean.setBOARD_VIDEO_URL(request.getParameter("videoURL"));
 		boardBean.setBOARD_TAG(request.getParameter("tag"));
@@ -41,7 +60,7 @@ public class BoardWriteAction implements Action {
 		}else {
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("./index.jsp"); // 리스트 페이지로 이동해야
+			forward.setPath("./boardList.kly");
 		}
 		return forward;
 	}

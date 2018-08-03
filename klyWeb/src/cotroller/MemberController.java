@@ -89,7 +89,9 @@ public class MemberController extends HttpServlet {
 		Ajax ajax = null;
 		String responseText = null;
 
-		// command에 따른 ActionForward 인스턴스 생성
+		/** command에 따른 ActionForward 인스턴스 생성 */
+		
+			// 1) 회원가입
 		if (command.equals("/memberJoin.kly")) {
 			action = new MemberJoinAction();
 			try {
@@ -97,6 +99,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 메인 페이지 조회 수 내림차순 리스트 
 		} else if (command.equals("/indexTopList.kly")) {
 			ajax = new IndexTopListAjax();
 			try {
@@ -105,7 +108,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			// 1) 메인 페이지 추천 수 내림차순 리스트
 		} else if (command.equals("/indexLikeList.kly")) {
 			ajax = new IndexLikeListAjax();
 			try {
@@ -114,7 +117,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 아이디 중복체크
+			// 1) 아이디 중복체크
 		} else if (command.equals("/idOverlapCheck.kly")) {
 			ajax = new IdOverlapCheckAjax();
 			try {
@@ -123,6 +126,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 가입 시, 이메일 인증
 		} else if (command.equals("/emailAuthAction.kly")) {
 			action = new EmailAuthAction();
 			try {
@@ -130,6 +134,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 이메일 인증 메일에서 이메일 인증
 		} else if (command.equals("/emailCheckedAction.kly")) {
 			action = new EmailCheckedAction();
 			try {
@@ -137,6 +142,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 로그인
 		} else if (command.equals("/memberLogin.kly")) {
 			action = new MemberLoginAction();
 			try {
@@ -144,6 +150,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 로그아웃
 		} else if (command.equals("/memberLogout.kly")) {
 			action = new MemberLogoutAction();
 			try {
@@ -151,6 +158,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 비밀번호 찾기
 		} else if (command.equals("/memberFindPass.kly")) {
 			action = new MemberFindPassAction();
 			try {
@@ -158,6 +166,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 비밀번호 찾기 했을 경우, 비밀번호 초기화
 		} else if (command.equals("/memberInitPass.kly")) { //
 			action = new MemberInitPassAction();
 			try {
@@ -165,6 +174,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 정보(마이페이지)
 		} else if (command.equals("/memberDetail.kly")) {
 			action = new MemberDetailAction();
 			try {
@@ -172,6 +182,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 탈퇴
 		} else if (command.equals("/memberDrop.kly")) {
 			action = new MemberDropAction();
 			try {
@@ -179,6 +190,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 정보 변경
 		} else if (command.equals("/memberInfoRivision.kly")) {
 			action = new MemberModifyAction();
 			try {
@@ -186,6 +198,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 임시 비밀번호로 로그인 후 비밀번호 변경 시
 		} else if (command.equals("/memberInfoRivisionFromTemp.kly")) {
 			action = new MemberModifyFromTempAction();
 			try {
@@ -193,6 +206,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 게시물 리스트(마이페이지)
 		}else if (command.equals("/myContent.kly")) {
 			action = new MemberContentListAction();
 			try {
@@ -200,6 +214,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 회원 게시물 등록
 		} else if (command.equals("/boardWrite.kly")) {
 			action = new BoardWriteAction();
 			try {
