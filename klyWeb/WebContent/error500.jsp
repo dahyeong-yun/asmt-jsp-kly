@@ -26,10 +26,10 @@
 
 	<!-- 내용 부분 -->
 	<div class="container" style="max-width:560px;text-align: center;">
-		<h1>404 Error</h1>
-		<img src="error/404robot.svg" style="max-width:300px;" />
+		<h1>500 Error</h1>
+		<img src="error/500robot.svg" style="max-width:300px;" />
 		<div class="alert alert-warning mt-4" role="alert">
-			확인할 수 없는 요청입니다.
+			페이지가 동작하지 않습니다.
 		</div>
 	</div>
 
