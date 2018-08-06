@@ -61,27 +61,16 @@ body {
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<<<<<<< HEAD
-
-=======
-<script type="text/javascript">
 	
-</script>
->>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
 <title>Title</title>
 </head>
 
 <body>
 	<!-- 상단바(footer) -->
 	<%@include file="./navbarTemplate.jsp"%>
-<<<<<<< HEAD
-	
-	<!--리스트 페이지의 몸통부분(article) -->
-	<div class="main" style="height: 100%; width: 1920px">
-=======
+
 	<!--리스트 페이지의 몸통부분 -->
 	<div class="main" style="height: 1080px; width: 1920px">
->>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
 		<!--몸통부분의 왼쪽 부분으로 동영상을 분류 별로 선택해서 보는 기능 으로 
 	category 값을 BoardCategoryAction 으로 넘김  -->
 		<div class="bg-light" id="leftbody"
@@ -133,15 +122,6 @@ body {
 		</div>
 
 		<script>
-<<<<<<< HEAD
-		/* 검색어 제한 함수 */
-		function searchCheck() {
-			var search = document.getElementById("search");
-			if(search.value == "") {
-				alert('검색 값을 입력해주세요.')
-			} else {
-				document.getElementById("searchForm").submit();
-=======
 			function searchCheck() {
 				var search = document.getElementById("search");
 				if (search.value == "") {
@@ -149,17 +129,11 @@ body {
 				} else {
 					document.getElementById("searchForm").submit();
 				}
->>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
 			}
-<<<<<<< HEAD
-		}
-=======
->>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
 		</script>
 		
 		<!-- 조회 수,추천 수 중 정렬기준을 정하는 기능 array와 category 값을 같이넘겨서 카테고리 내에서도 정렬 기준을 선택 할 수 있음(전체목록 정렬이 안됨)-->
-		<div class="main" id="rightbody"
-			style="height: 100%; width: 1670px; float: right; overflow-x: auto;">
+		<div class="main" id="rightbody" style="height: 100%; width: 1670px; float: right; overflow-x: auto;">
 			<div class="dropdown">
 				<button type="button"
 					class="btn btn-outline-primary dropdown-toggle"
@@ -338,13 +312,6 @@ body {
 		</div>
 	</div>
 
-	<!-- List페이지의 동영상게시 갯수를 누를때 마다 늘린다. 미구현  -->
-	<%-- <div class="js-btn" id="btn">
-		<input type="hidden" id="more" name="more" value="${more}">
-		<button type="button" class="btn btn-default btn-sm btn-block"
-			onclick="javascript:;" id="more">더보기</button>
-	</div> --%>
-
 	<!-- 게시글 등록 -->
 	<form action="./boardWrite.kly" method="get" id="boardWrite"
 		onsubmit="return alertSelectCategory()">
@@ -385,25 +352,12 @@ body {
 						</div>
 
 						<div id="video">
-<<<<<<< HEAD
 							<label for="video_upload">동영상 올리기</label>
 							<input type="radio" id="video_upload" name="videoFile" value="upload" 
 							onclick="switchDisplay('input_upload');">
 							
 							<label for="video">URL</label>
-							<input type="radio" id="video_URL" name="videoURL" value="url" checked="checked"
-=======
-							<label for="video_upload">동영상 링크</label><!-- <input type="radio"
-								id="video_upload" name="videoFile" value="upload"
-								onclick="switchDisplay('input_upload');"> <label
-								for="video">URL</label> <input type="radio" id="video_URL"
-								name="videoURL" value="url"
->>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
-								onclick="switchDisplay('input_url');">
-
-							<div id="input_upload" style="display: none">
-								<input type="file" name="file">
-							</div> -->
+							<input type="radio" id="video_URL" name="videoURL" value="url" checked="checked">
 
 							<div id="input_url">
 								<input type="url" class="form-control" name="video_URL"
@@ -442,17 +396,6 @@ body {
 				return true;
 			}
 		}
-
-		/*동영상 첨부 방식선택*/
-		/* function switchDisplay(select) {
-			if (select == "input_upload") {
-				document.getElementById("input_upload").style.display = "";
-				document.getElementById("input_url").style.display = 'none';
-			} else {
-				document.getElementById("input_upload").style.display = 'none';
-				document.getElementById("input_url").style.display = "";
-			}
-		} */
 	</script>
 
 </body>

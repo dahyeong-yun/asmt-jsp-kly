@@ -16,7 +16,7 @@
 		script.println("location.href='index.jsp'");
 		script.println("</script>");
 		script.close();
-	} else {"WebContent/myPageDrop.jsp"
+	} else {
 		if(loginInfo.getMEMBER_CHECKED()==0) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
