@@ -215,7 +215,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 4) 회원 게시물 등록
+			// 4) 회원 게시물 등록_리스트 페이지
 		} else if (command.equals("/boardWrite.kly")) {
 			action = new BoardWriteAction();
 			try {
@@ -223,7 +223,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 4) 게시물 리스_리스트 페이지
+			// 4) 게시물 리스트_리스트 페이지
 		} else if (command.equals("/boardList.kly")) {
 			action = new BoardListAction();
 			try {
@@ -231,7 +231,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 관리자 댓글 리스트(관리자 페이지)
+			// 1) 관리자 댓글 리스트_관리자 페이지
 		} else if (command.equals("/adminComment.kly")) {
 			action = new AdminCommentListAction();
 			try {
@@ -303,7 +303,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 4) 게시물 신고 리스트_관리자 페이지
+			// 5) 게시물 신고 리스트_관리자 페이지
 		} else if (command.equals("/boardSuspendList.kly")) { // 게시물 관리페이지
 			action = new BoardSuspendListAction();
 			try {
@@ -311,7 +311,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 4) 게시물 삭제_관리자 페이지
+			// 5) 게시물 삭제_관리자 페이지
 		} else if (command.equals("/boardSuspendDelete.kly")) { // 게시물 관리페이지에서의 삭제
 			action = new BoardSuspendDeleteAction();
 			try {
@@ -319,7 +319,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 4) 게시물 신고 리스트_관리자 페이지
+			// 5) 게시물 신고 리스트_관리자 페이지
 		} else if (command.equals("/boardSuspendRelieve.kly")) { // 게시물 관리페이지에서의 신고 해제(REPORT_COUNT = 0)
 			action = new BoardSuspendRelieveAction();
 			try {
@@ -358,7 +358,7 @@ public class MemberController extends HttpServlet {
 			//
 		} else if (command.equals("/cancelLike.kly")) {
 			response.getWriter().write("success");
-			// 게시물 조회 수 증가
+			// 4) 게시물 조회 수 증가_리스트 페이지
 		} else if (command.equals("/viewCount.kly")) {
 			ajax = new viewCountAjax();
 			try {
