@@ -984,4 +984,29 @@ public class BoardDAO {
 		return updateResult;
 	}
 
+	public int viewCount(int bOARD_NUM) {
+		String sql1 = "SELECT BOARD_READCOUNT FROM BOARD WHERE BOARD_NUM = ?";
+		String sql2 = "UPDATE BOARD SET BOARD_READCOUNT = ? WHERE BOARD_NUM = ?";
+		int updateResult = 0;
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql1);
+			pstmt.setInt(1, bOARD_NUM);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int readCount = rs.getInt(1) + 1;
+				pstmt = con.prepareStatement(sql2);
+				pstmt.setInt(1, readCount);
+				pstmt.setInt(2, bOARD_NUM);
+				updateResult = pstmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			System.out.println("viewCount 오류" + e);
+		} finally {
+			close(pstmt);
+		}
+		return updateResult;
+	}
+
 }

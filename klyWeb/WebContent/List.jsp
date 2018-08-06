@@ -63,6 +63,23 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 	
 <title>Title</title>
+<script>
+	function viewCount(id, boardNum) {
+		var content = document.getElementById(id);
+		content.style.display = 'block';
+		
+		var req = new XMLHttpRequest();
+		req.onreadystatechange = function () {
+			if(this.state == 4 && this.status == 200) {
+				var result = JSON.parse(responseText);
+				console.log("조회 수 증가 결과 : "+result.result);
+			}
+		}
+		
+		req.open("GET","./viewCount.kly?boardNum="+boardNum, true);
+		req.send();
+	}
+</script>
 </head>
 
 <body>
@@ -234,7 +251,7 @@ body {
 									<img class="btn-img"
 										src="https://img.youtube.com/vi/${board.BOARD_YOUTUBE_ID}/0.jpg"
 										style="width: 200px; height: 120px;"
-										onclick="document.getElementById('id0${status.count}').style.display='block'">
+										onclick="viewCount('id0${status.count}', ${board.BOARD_NUM})">
 									<div>
 										<span class="writer" style="color: blueviolet;">${board.MEMBER_ID}</span>
 										<span class="videotitle">${board.BOARD_SUBJECT}</span>
@@ -311,6 +328,8 @@ body {
 			</div>
 		</div>
 	</div>
+
+
 
 	<!-- 게시글 등록 -->
 	<form action="./boardWrite.kly" method="get" id="boardWrite"
