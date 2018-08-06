@@ -78,42 +78,28 @@ CREATE TABLE REPORT(
 
 -- Dummy Data MEMBER
 INSERT INTO MEMBER VALUES('123','123',null,0,'gryb809@naver.com',0,Sysdate,Sysdate);
+INSERT INTO MEMBER VALUES('test','123',null,0,'test@naver.com',0,Sysdate,Sysdate);
 INSERT INTO MEMBER VALUES('qwe','123',null,0,'gryb809@naver.com',1,sysdate,Sysdate);
 INSERT INTO MEMBER VALUES('admin','123',null,0,'gryb809@naver.com',1,sysdate,Sysdate);
 INSERT INTO MEMBER VALUES('tempId','123',null,0,'gryb809@naver.com',1,sysdate,Sysdate);
-INSERT INTO MEMBER VALUES('A','1234',null,0,'dwqwe2@gmail.com',0,sysdate,Sysdate);
-INSERT INTO MEMBER VALUES('B','1234',null,0,'dwqwe2@gmail.com',0,sysdate,Sysdate);
-INSERT INTO MEMBER VALUES('C','1234',null,0,'Jony123@gmail.com',0,sysdate,Sysdate);
-INSERT INTO MEMBER VALUES('D','1234',null,0,'dfdsfw@gmail.com',0,sysdate,Sysdate);
-INSERT INTO MEMBER VALUES('E','1234',null,0,'whdwrkdgu@daum.net',0,sysdate,Sysdate);
+INSERT INTO MEMBER VALUES('dmtja','1234',null,0,'dwqwe2@gmail.com',0,sysdate,Sysdate);
+INSERT INTO MEMBER VALUES('bas','1234',null,0,'dwqwe2@gmail.com',0,sysdate,Sysdate);
+INSERT INTO MEMBER VALUES('qwer','1234',null,0,'Jony123@gmail.com',0,sysdate,Sysdate);
+INSERT INTO MEMBER VALUES('rydvr12','1234',null,0,'dfdsfw@gmail.com',0,sysdate,Sysdate);
+INSERT INTO MEMBER VALUES('abcdefg','1234',null,0,'whdwrkdgu@daum.net',0,sysdate,Sysdate);
+INSERT INTO MEMBER VALUES('koxk','1234',null,0,'koxk@naver.com',1,sysdate,Sysdate);
+
 
 -- Dummy Data BOARD
-INSERT INTO BOARD VALUES('A',1,'aA',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/zjwqIyoWV8c" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',10,5,0,'롤','게임',0,'zjwqIyoWV8c');
-INSERT INTO BOARD VALUES('B',2,'aB',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/sB-yuZ2Qncg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',5,10,0,'배그','게임',0,'sB-yuZ2Qncg');
-INSERT INTO BOARD VALUES('C',3,'aC',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/1yDYGOFc5qY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'일상','유머',0,'1yDYGOFc5qY');
-INSERT INTO BOARD VALUES('D',4,'aD',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/9Xlc_UyjQQY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'축구','스포츠',0,'9Xlc_UyjQQY');
-INSERT INTO BOARD VALUES('E',5,'aE',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'배그','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',6,'a1',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',7,'a2',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',8,'a3',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',9,'a4',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',10,'a5',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',11,'a6',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',12,'a7',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',13,'a8',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',14,'a9',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',15,'a10',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',16,'a11',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',17,'a12',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',18,'a13',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
-INSERT INTO BOARD VALUES('E',19,'a14',Sysdate,null,'<iframe width="420" height="315" src="https://www.youtube.com/embed/f3P_lHInI14" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',0,0,0,'개','동물',0,'f3P_lHInI14');
+INSERT INTO BOARD VALUES('test',1,'ㅇㅅ 페이커',Sysdate,null,'https://youtu.be/zjwqIyoWV8c',9,20,0,'#롤 #페이커 #lol','게임',0,'zjwqIyoWV8c');
+INSERT INTO BOARD VALUES('koxk',2,'번트킹',Sysdate,null,'https://youtu.be/xaR62n0byLw',2,30,0,'#야구 #번트','스포츠',0,'xaR62n0byLw');
 
 -- Dummy Data COMMENT
-INSERT INTO BOARD_COMMENT VALUES(1,'B',1,'추천 누르고 갑니다',SYSDATE,0);
-INSERT INTO BOARD_COMMENT VALUES(1,'C',2,'재밌네요',SYSDATE,0);
-INSERT INTO BOARD_COMMENT VALUES(1,'D',3,'ㅋㅋㅋㅋㅋㅋㅋㅋ',SYSDATE,0);
-INSERT INTO BOARD_COMMENT VALUES(2,'B',4,'이걸 이렇게???',SYSDATE,0);
-INSERT INTO BOARD_COMMENT VALUES(2,'B',5,'뭐지..',SYSDATE,0);
+INSERT INTO BOARD_COMMENT VALUES(1,'test',1,'추천 누르고 갑니다',SYSDATE,0);
+INSERT INTO BOARD_COMMENT VALUES(1,'koxk',2,'재밌네요',SYSDATE,0);
+INSERT INTO BOARD_COMMENT VALUES(1,'admin',3,'ㅋㅋㅋㅋㅋㅋㅋㅋ',SYSDATE,0);
+INSERT INTO BOARD_COMMENT VALUES(2,'bas',4,'이걸 이렇게???',SYSDATE,0);
+INSERT INTO BOARD_COMMENT VALUES(2,'qwer',5,'뭐지..',SYSDATE,0);
 INSERT INTO BOARD_COMMENT VALUES(1,'tempId',6, 'asd',SYSDATE,6);
 INSERT INTO BOARD_COMMENT VALUES(1,'tempId',7,'Asdasss',SYSDATE,5);
 INSERT INTO BOARD_COMMENT VALUES(1,'tempId',8,'ASdasdsadkj',SYSDATE,4);
@@ -155,3 +141,5 @@ DROP TABLE REPORT;
 DELETE FROM MEMBER WHERE MEMBER_ID = '123';
 
 COMMIT;
+
+

@@ -179,14 +179,14 @@ body {
 										<img class="btn-img" src="./images/like.png"
 											onclick="location='boardLike.kly?board_num=${board.BOARD_NUM}&member_id=${loginInfo.MEMBER_ID}'">
 										<span style="color: blue">${board.BOARD_LIKECOUNT}</span>
-										<div class="btn-group" style="text-align: right; width: 420px">
+										<div class="btn-group">
 											<img class="btn-img" src="./images/report.jpg"
 												onclick="location='boardReport.kly?board_num=${board.BOARD_NUM}&member_id=${loginInfo.MEMBER_ID}'">
 											&nbsp;<img class="btn-img" src="./images/delete.png"
 												onclick="location='boardDelete.kly?board_num=${board.BOARD_NUM}&member_id=${loginInfo.MEMBER_ID}'">
 										</div>
 										<span style="color: cadetblue;"><img
-											src="./images/tag.png">#${board.BOARD_TAG }</span>
+											src="./images/tag.png">${board.BOARD_TAG }</span>
 									</div>
 								</div>
 								<div>
@@ -228,7 +228,7 @@ body {
 						<tr>
 					</c:if>
 					<td>
-						<div class="card" id="card" style="height: 220px">
+						<div class="card" id="card" style="height: 260px">
 							<div class="card-body text-center">
 								<div class="videoplay">
 									<img class="btn-img"
@@ -240,7 +240,7 @@ body {
 										<span class="videotitle">${board.BOARD_SUBJECT}</span>
 									</div>
 									<div>
-										<span class="videoCategory">분류:${board.BOARD_CATEGORY}</span>
+										<span class="videoCategory" style="color:lightpink">분류:${board.BOARD_CATEGORY}</span>
 										<span class="videoLike" style="color: blue"><img
 											src="./images/like.png">${board.BOARD_LIKECOUNT}</span> <span
 											class="videoReadCount"><img src="./images/view.jpg">${board.BOARD_READCOUNT}</span>
@@ -248,7 +248,7 @@ body {
 									<div>
 										<span class="videoUptime">${board.BOARD_DATE}</span> <span
 											class="videoTag" style="color: cadetblue"><img
-											src="./images/tag.png">#${board.BOARD_TAG}</span>
+											src="./images/tag.png">${board.BOARD_TAG}</span>
 									</div>
 								</div>
 							</div>
@@ -347,7 +347,7 @@ body {
 
 						<div id="subject">
 							<label for="subject" style="display: inline;">제목</label> <input
-								type="text" class="form-control" name="subject"
+								type="text" class="form-control" name="subject" maxlength="30"
 								placeholder="게시글 제목을 입력하세요" required>
 						</div>
 
@@ -361,15 +361,15 @@ body {
 
 							<div id="input_url">
 								<input type="url" class="form-control" name="video_URL"
-									value="https://">
+									placeholder="https://">
 							</div>
 						</div>
-
+	
 
 						<div id="tag">
 							<label for="tag">태그</label> <input type="text"
-								class="form-control" name="tag"
-								placeholder="태그와 태그는 해쉬태그로 구분하며, 10개까지 입력하실 수 있습니다.">
+								class="form-control" name="tag" maxlength="30"
+								placeholder="태그와 태그는 해쉬태그로 구분하며, 30자까지 입력하실 수 있습니다.">
 							<!-- <input type="text" name="tagnames" id="tagnames" class="box_input _click(TagValidator|TagNames) _keyup(TagValidator|ValidateTagNames) _blur(TagValidator|ValidateTagNames)"> -->
 						</div>
 

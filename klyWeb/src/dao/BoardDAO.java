@@ -231,7 +231,7 @@ public class BoardDAO {
 	public int getListCategoryCount(BoardBean category) {
 		int listCount = 0;
 		String sql1 = "SELECT COUNT(*) FROM BOARD";
-		String sql2 = "SELECT COUNT(*) FROM BOARD WHERE BOARD_CATEGOEY=?";
+		String sql2 = "SELECT COUNT(*) FROM BOARD WHERE BOARD_CATEGORY=?";
 		try {
 			if (category.getBOARD_CATEGORY().equals(null)) {
 				pstmt = con.prepareStatement(sql1);
@@ -333,7 +333,7 @@ public class BoardDAO {
 	 * 2.추천수 정렬에 사용하는 메소드 카테고리 값이 있으면 카테고리도 함께 저장 없으면 추천수 정렬만 저장
 	 */
 	public ArrayList<BoardBean> getLikeList(BoardBean category, int page, int limit) {
-		String sql1 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_LIKECOUNT DESC) V1)V2 WHERE BOARD_CATEGORY=? AND V2.RN2 BETWEEN ? AND ?";
+		String sql1 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD WHERE BOARD_CATEGORY=? ORDER BY BOARD_LIKECOUNT DESC) V1)V2 WHERE BOARD_CATEGORY=? AND V2.RN2 BETWEEN ? AND ?";
 		String sql2 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_LIKECOUNT DESC) V1)V2 WHERE V2.RN2 BETWEEN ? AND ?"; // 보드
 																																								// 테이블을
 																																								// 추천
@@ -352,8 +352,9 @@ public class BoardDAO {
 				pstmt = con.prepareStatement(sql1);
 				System.out.println(category.getBOARD_CATEGORY());// 보드테이블에 카테고리값을 넘김
 				pstmt.setString(1, category.getBOARD_CATEGORY());
-				pstmt.setInt(2, startrow);
-				pstmt.setInt(3, endrow);
+				pstmt.setString(2, category.getBOARD_CATEGORY());
+				pstmt.setInt(3, startrow);
+				pstmt.setInt(4, endrow);
 			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -386,7 +387,7 @@ public class BoardDAO {
 	 * 3.조회수 정렬에 사용하는 메소드 카테고리 값이 있으면 카테고리도 함께 저장 없으면 조회수 정렬만 저장
 	 */
 	public ArrayList<BoardBean> getReadList(BoardBean category, int page, int limit) {
-		String sql1 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_READCOUNT DESC) V1)V2 WHERE BOARD_CATEGORY=? AND V2.RN2 BETWEEN ? AND ?";
+		String sql1 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD WHERE BOARD_CATEGORY=? ORDER BY BOARD_READCOUNT DESC) V1)V2 WHERE BOARD_CATEGORY=? AND V2.RN2 BETWEEN ? AND ?";
 		String sql2 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_READCOUNT DESC) V1)V2 WHERE V2.RN2 BETWEEN ? AND ?"; // 보드
 																																								// 테이블을
 																																								// 추천
@@ -405,8 +406,9 @@ public class BoardDAO {
 				pstmt = con.prepareStatement(sql1);
 				System.out.println(category.getBOARD_CATEGORY());// 보드테이블에 카테고리값을 넘김
 				pstmt.setString(1, category.getBOARD_CATEGORY());
-				pstmt.setInt(2, startrow);
-				pstmt.setInt(3, endrow);
+				pstmt.setString(2, category.getBOARD_CATEGORY());
+				pstmt.setInt(3, startrow);
+				pstmt.setInt(4, endrow);
 			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -497,7 +499,7 @@ public class BoardDAO {
 
 	/** 6.카테고리 별로 목록을 출력시키는 메소드 */
 	public ArrayList<BoardBean> getCategory(BoardBean category, int page, int limit) {
-		String sql = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_DATE DESC) V1)V2 WHERE BOARD_CATEGORY=? AND V2.RN2 BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD WHERE BOARD_CATEGORY=? ORDER BY BOARD_DATE DESC) V1)V2 WHERE BOARD_CATEGORY=? AND V2.RN2 BETWEEN ? AND ?";
 
 		int startrow = (page - 1) * limit + 1;
 		int endrow = page * limit;
@@ -507,8 +509,9 @@ public class BoardDAO {
 			pstmt = con.prepareStatement(sql);
 			System.out.println(category.getBOARD_CATEGORY()); // 객체에서 받아온 카테고리값 저장
 			pstmt.setString(1, category.getBOARD_CATEGORY());
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, endrow);
+			pstmt.setString(2, category.getBOARD_CATEGORY());
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, endrow);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BoardBean boardBean = new BoardBean();

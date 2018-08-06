@@ -23,8 +23,10 @@ public class BoardSearchAction implements Action {
 		PrintWriter out = response.getWriter();
 		String searchValue = request.getParameter("search");
 		System.out.println(searchValue.length());
+		
 		search.setBOARD_SUBJECT(searchValue); // 쿼리문 전송 위한 검색값 저장
 		search.setBOARD_TAG(searchValue);
+		
 		BoardSearchService boardSearchService = new BoardSearchService(); // 객체선언
 		BoardCommentListService boardCommentListService = new BoardCommentListService(); // 객체 선언
 		ArrayList<CommentBean> commentList = boardCommentListService.BoardCommentListService(); // 댓글목록 객체배열선언

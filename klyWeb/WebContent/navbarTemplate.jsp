@@ -142,7 +142,6 @@
                                 
                                 <label><h5>이메일</h5></label>
                                 <input class="form-control" name="MEMBER_EMAIL" type="email" id="inputEmail" placeholder="이메일을 입력해 주세요."/>
-                                
                                     
                             </div>
 							<div class="modal-footer">
