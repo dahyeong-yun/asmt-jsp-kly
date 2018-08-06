@@ -26,21 +26,21 @@
 					var out =
 						"<tr>" +
 							"<td>" + arr.value0[0] + "</td>"+
-							"<td><a href=\"./List.jsp\"><img src=\"" + arr.value0[1] + "\"></a></td>"+
+							"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value0[1] + "\"></a></td>"+
 							"<td>" + arr.value0[2] + "</td>"+
 							"<td>" + arr.value0[3] + "</td>"+
 							"<td>" + arr.value0[4] + "</td>"+
 						"</tr>" +
 						"<tr>" +
 							"<td>" + arr.value1[0] + "</td>"+
-							"<td><a href=\"./List.jsp\"><img src=\"" + arr.value1[1] + "\"></a></td>"+
+							"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value1[1] + "\"></a></td>"+
 							"<td>" + arr.value1[2] + "</td>"+
 							"<td>" + arr.value1[3] + "</td>"+
 							"<td>" + arr.value1[4] + "</td>"+
 						"</tr>" +
 						"<tr>" +
 							"<td>" + arr.value2[0] + "</td>"+
-							"<td><a href=\"./List.jsp\"><img src=\"" + arr.value2[1] + "\"></a></td>"+
+							"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value2[1] + "\"></a></td>"+
 							"<td>" + arr.value2[2] + "</td>"+
 							"<td>" + arr.value2[3] + "</td>"+
 							"<td>" + arr.value2[4] + "</td>"+
@@ -62,21 +62,21 @@
 						var out =
 							"<tr>" +
 								"<td>" + arr.value0[0] + "</td>"+
-								"<td><a href=\"./List.jsp\"><img src=\"" + arr.value0[1] + "\"></a></td>"+
+								"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value0[1] + "\"></a></td>"+
 								"<td>" + arr.value0[2] + "</td>"+
 								"<td>" + arr.value0[3] + "</td>"+
 								"<td>" + arr.value0[4] + "</td>"+
 							"</tr>" +
 							"<tr>" +
 								"<td>" + arr.value1[0] + "</td>"+
-								"<td><a href=\"./List.jsp\"><img src=\"" + arr.value1[1] + "\"></a></td>"+
+								"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value1[1] + "\"></a></td>"+
 								"<td>" + arr.value1[2] + "</td>"+
 								"<td>" + arr.value1[3] + "</td>"+
 								"<td>" + arr.value1[4] + "</td>"+
 							"</tr>" +
 							"<tr>" +
 								"<td>" + arr.value2[0] + "</td>"+
-								"<td><a href=\"./List.jsp\"><img src=\"" + arr.value2[1] + "\"></a></td>"+
+								"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value2[1] + "\"></a></td>"+
 								"<td>" + arr.value2[2] + "</td>"+
 								"<td>" + arr.value2[3] + "</td>"+
 								"<td>" + arr.value2[4] + "</td>"+
