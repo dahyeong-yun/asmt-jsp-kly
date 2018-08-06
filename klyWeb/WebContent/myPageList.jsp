@@ -16,6 +16,15 @@
 		script.println("location.href='index.jsp'");
 		script.println("</script>");
 		script.close();
+	} else {
+		if(loginInfo.getMEMBER_CHECKED()==0) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이메일 인증 후 이용해 주세요.')");
+			script.println("location.href='emailSendConfirm.jsp'");
+			script.println("</script>");
+			script.close();
+		}
 	}
 %>
 <!DOCTYPE html>

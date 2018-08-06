@@ -3,7 +3,7 @@
 <%@ page import="bean.MemberBean" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <%
+<%
 	/* 로그인 사용자만 접속 가능 */
 	MemberBean loginInfo = (MemberBean) session.getAttribute("loginInfo");
 
@@ -26,7 +26,7 @@
 	}
 	
 
-%> --%>
+%>
 <!DOCTYPE html>
 <html>
   <head>
