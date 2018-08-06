@@ -45,6 +45,7 @@ import ajax.Ajax;
 import ajax.IdOverlapCheckAjax;
 import ajax.IndexLikeListAjax;
 import ajax.IndexTopListAjax;
+import ajax.viewCountAjax;
 import bean.ActionForward;
 
 @WebServlet("*.kly")
@@ -354,8 +355,19 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			//
 		} else if (command.equals("/cancelLike.kly")) {
 			response.getWriter().write("success");
+			// 게시물 조회 수 증가
+		} else if (command.equals("/viewCount.kly")) {
+			ajax = new viewCountAjax();
+			try {
+				responseText = ajax.getJSON(request, response); // JSON
+				response.getWriter().write(responseText);
+				System.out.println("at Controller\nJSON data 보내기 성공");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
