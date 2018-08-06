@@ -56,7 +56,7 @@ public class MemberFindPassAction implements Action {
 		// 이메일 전송
 		EmailAuthService eas = new EmailAuthService();
 		
-		String host = "http://localhost:8081/klyWeb/";
+		String host = "http://192.168.0.133:8082/klyWeb/";
 		String from = "gryb809@gmail.com";
 		String to = eas.getUserEmail(memberID); // 유저의 가입 이메일 가져오기.
 		
