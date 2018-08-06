@@ -2,9 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="bean.BoardBean"%>
 <%@ page import="bean.CommentBean"%>
+<%@ page import="bean.PageInfo" %>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+	ArrayList<BoardBean> boardList = (ArrayList<BoardBean>) request.getAttribute("boardlist");
+	//페이징 정보 가져오기
+	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
+
+	int nowPage = pageInfo.getPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();
+	int listCount = pageInfo.getListCount();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,40 +63,6 @@ body {
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	/* function loadNextMore() {
-		var more = $('#more').val();
-		more = parseInt(more);
-		more += 4;
-		$.ajax({
-			type : 'post',
-			url : 'moreList.kly',
-			data : ({
-				more : more
-			}),
-			success : function(data) {
-
-			}
-		})
-	} */
-	$(window).on('moreList', function() {
-		load('#vedio', '4');
-		$("#btn .btn btn-default btn-sm btn-block").on("click", function() {
-			moreList('#vedio', '4', '#btn');
-		})
-	});
-
-	function moreList(id, cnt, btn) {
-		var girls_list = id + " #card:not(.active)";
-		var girls_length = $(girls_list).length;
-		var girls_total_cnt;
-		if (cnt < girls_length) {
-			girls_total_cnt = cnt;
-		} else {
-			girls_total_cnt = girls_length;
-			$('.btn btn-default btn-sm btn-block').hide()
-		}
-		$(girls_list + ":lt(" + girls_total_cnt + ")").addClass("active");
-	}
 </script>
 <title>Title</title>
 </head>
@@ -93,7 +71,7 @@ body {
 	<!-- 상단바(footer) -->
 	<%@include file="./navbarTemplate.jsp"%>
 	<!--리스트 페이지의 몸통부분 -->
-	<div class="main" style="height: 100%; width: 1920px">
+	<div class="main" style="height: 1080px; width: 1920px">
 		<!--몸통부분의 왼쪽 부분으로 동영상을 분류 별로 선택해서 보는 기능 으로 
 	category 값을 BoardCategoryAction 으로 넘김  -->
 		<div class="bg-light" id="leftbody"
@@ -279,6 +257,49 @@ body {
 					<c:set var="i" value="${i+1 }" />
 				</c:forEach>
 			</table>
+			<div style="text-align:center">
+				<%
+					if (nowPage <= 1) {
+				%>
+				<button type="button" class="btn btn-outline-info">이전</button>&nbsp;
+				<%
+					} else {
+				%>
+				<button type="button" class="btn btn-outline-info" onclick="location='boardList.kly?page=<%=nowPage - 1%>'">이전</button>
+				<%
+					}
+				%>
+				<div class="btn-group">
+				<%
+					for (int a = startPage; a <= endPage; a++) {
+						if (a == nowPage) {
+				%>
+				<button type="button" class="btn btn-outline-info"><%=a%></button>
+				<%
+					} else {
+				%>
+				<button type="button" class="btn btn-outline-info" onclick="location='boardList.kly?page=<%=a%>'"><%=a%></button> &nbsp;
+				<%
+					}
+				%>
+				<%
+					}
+				%>
+				</div>
+				<%
+					if (nowPage >= maxPage) {
+				%>
+				<button type="button" class="btn btn-outline-info">다음</button>	
+				<%
+					} else {
+				%>
+				<button type="button" class="btn btn-outline-info" onclick="location='boardList.kly?page=<%=nowPage + 1%>'">다음</button>
+				<%
+					}
+				%>
+
+				
+			</div>
 		</div>
 	</div>
 

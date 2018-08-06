@@ -189,15 +189,13 @@ public class BoardDAO {
 		return articleList;
 	}
 
-	public ArrayList<BoardBean> getBoardList(int page, int limit) {
-		String sql = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM "
-					+ "(SELECT * FROM BOARD ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC) V1) V2 WHERE V2.RN2 BETWEEN ? AND ?";
-		
-		int startrow = (page-1)*limit+1;
-		int endrow = page*limit;
-		
-		ArrayList<BoardBean> boardList = 
-				new ArrayList<BoardBean>();
+	public ArrayList<BoardBean> getboardList(int page, int limit) {
+		String sql = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_DATE DESC) V1)V2 WHERE V2.RN2 BETWEEN ? AND ?";
+
+		int startrow = (page - 1) * limit + 1;
+		int endrow = page * limit;
+
+		ArrayList<BoardBean> boardList = new ArrayList<BoardBean>();
 		BoardBean boardBean = null;
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -205,37 +203,33 @@ public class BoardDAO {
 			pstmt.setInt(2, endrow);
 			rs = pstmt.executeQuery();
 
-			if(rs.next()) {
-				do {
-					boardBean = new BoardBean();
-					boardBean.setMEMBER_ID(rs.getString(1));
-					boardBean.setBOARD_NUM(rs.getInt(2));
-					boardBean.setBOARD_SUBJECT(rs.getString(3));
-					boardBean.setBOARD_DATE(rs.getDate(4));
-					boardBean.setBOARD_VIDEO_FILE(rs.getString(5));
-					boardBean.setBOARD_VIDEO_URL(rs.getString(6));
-					boardBean.setBOARD_READCOUNT(rs.getInt(7));
-					boardBean.setBOARD_LIKECOUNT(rs.getInt(8));
-					boardBean.setBOARD_REPORTCOUNT(rs.getInt(9));
-					boardBean.setBOARD_TAG(rs.getString(10));
-					boardBean.setBOARD_CATEGORY(rs.getString(11));
-					boardBean.setBOARD_BLIND(rs.getInt(12));
-					boardBean.setBOARD_YOUTUBE_ID(rs.getString(13));
-					boardList.add(boardBean);		
-				}while(rs.next());
+			while (rs.next()) {
+				boardBean = new BoardBean();
+				boardBean.setMEMBER_ID(rs.getString("MEMBER_ID"));
+				boardBean.setBOARD_NUM(rs.getInt("BOARD_NUM"));
+				boardBean.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
+				boardBean.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+				boardBean.setBOARD_VIDEO_FILE(rs.getString("BOARD_FILE"));
+				boardBean.setBOARD_VIDEO_URL(rs.getString("BOARD_URL"));
+				boardBean.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
+				boardBean.setBOARD_LIKECOUNT(rs.getInt("BOARD_LIKECOUNT"));
+				boardBean.setBOARD_REPORTCOUNT(rs.getInt("BOARD_REPORTCOUNT"));
+				boardBean.setBOARD_TAG(rs.getString("BOARD_TAG"));
+				boardBean.setBOARD_CATEGORY(rs.getString("BOARD_CATEGORY"));
+				boardBean.setBOARD_BLIND(rs.getInt("BOARD_BLIND"));
+				boardBean.setBOARD_YOUTUBE_ID(rs.getString("BOARD_YOUTUBE_ID"));
+				boardList.add(boardBean);
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
+		} catch (Exception e) {
+			System.out.println("pagelist 오류" + e);
+		} finally {
 			close(pstmt);
 			close(rs);
 		}
-	
-		
-		return boardList;
-		
-	}
 
+		return boardList;
+
+	}
 	public int getListCount() {
 		int listCount = 0;
 		String sql = "SELECT COUNT(*) FROM BOARD";
@@ -263,20 +257,20 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();					
 			while(rs.next()) {
 				boardBean = new BoardBean();
-				boardBean.setMEMBER_ID(rs.getString(1));
-				boardBean.setBOARD_NUM(rs.getInt(2));
-				boardBean.setBOARD_SUBJECT(rs.getString(3));
-				boardBean.setBOARD_DATE(rs.getDate(4));
-				boardBean.setBOARD_VIDEO_FILE(rs.getString(5));
-				boardBean.setBOARD_VIDEO_URL(rs.getString(6));
-				boardBean.setBOARD_READCOUNT(rs.getInt(7));
-				boardBean.setBOARD_LIKECOUNT(rs.getInt(8));
-				boardBean.setBOARD_REPORTCOUNT(rs.getInt(9));
-				boardBean.setBOARD_TAG(rs.getString(10));
-				boardBean.setBOARD_CATEGORY(rs.getString(11));
-				boardBean.setBOARD_BLIND(rs.getInt(12));
-				boardBean.setBOARD_YOUTUBE_ID(rs.getString(13));
-				boardList.add(boardBean);					
+				boardBean.setMEMBER_ID(rs.getString("MEMBER_ID"));
+				boardBean.setBOARD_NUM(rs.getInt("BOARD_NUM"));
+				boardBean.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
+				boardBean.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+				boardBean.setBOARD_VIDEO_FILE(rs.getString("BOARD_FILE"));
+				boardBean.setBOARD_VIDEO_URL(rs.getString("BOARD_URL"));
+				boardBean.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
+				boardBean.setBOARD_LIKECOUNT(rs.getInt("BOARD_LIKECOUNT"));
+				boardBean.setBOARD_REPORTCOUNT(rs.getInt("BOARD_REPORTCOUNT"));
+				boardBean.setBOARD_TAG(rs.getString("BOARD_TAG"));
+				boardBean.setBOARD_CATEGORY(rs.getString("BOARD_CATEGORY"));
+				boardBean.setBOARD_BLIND(rs.getInt("BOARD_BLIND"));
+				boardBean.setBOARD_YOUTUBE_ID(rs.getString("BOARD_YOUTUBE_ID"));
+				boardList.add(boardBean);				
 			}		
 		}catch(Exception e) {
 			System.out.println("list 오류"+e);
@@ -289,35 +283,41 @@ public class BoardDAO {
 
 	/**2.추천수 정렬에 사용하는 메소드 카테고리 값이 있으면 카테고리도 함께 저장
 	 * 없으면 추천수 정렬만 저장*/
-	public ArrayList<BoardBean> getLikeList(BoardBean category) {	
-		String sql1 = "SELECT * FROM BOARD WHERE BOARD_CATEGORY=? ORDER BY BOARD_LIKECOUNT DESC"; //카테고리 값을 가진 보드 테이블을 추천 순서로 조회
-		String sql2 = "SELECT * FROM BOARD ORDER BY BOARD_LIKECOUNT DESC";    //보드 테이블을 추천 순서로 조회
-		ArrayList<BoardBean> boardList =new ArrayList<BoardBean>();			
+	public ArrayList<BoardBean> getLikeList(BoardBean category,int page, int limit) {	
+		String sql1 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_LIKECOUNT DESC) V1)V2 WHERE BOARD_CATEGORY=? AND V2.RN2 BETWEEN ? AND ?";
+		String sql2 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_LIKECOUNT DESC) V1)V2 WHERE V2.RN2 BETWEEN ? AND ?";    //보드 테이블을 추천 순서로 조회
+		ArrayList<BoardBean> boardList =new ArrayList<BoardBean>();		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = page * limit;
 				try {
 					if(category.getBOARD_CATEGORY().equals("")) {
 						pstmt = con.prepareStatement(sql2); //조회만함
+						pstmt.setInt(1, startrow);
+						pstmt.setInt(2, endrow);
 						System.out.println("test11");
 					}else {
 						pstmt = con.prepareStatement(sql1);
 						System.out.println(category.getBOARD_CATEGORY());//보드테이블에 카테고리값을 넘김
 						pstmt.setString(1, category.getBOARD_CATEGORY());
+						pstmt.setInt(2, startrow);
+						pstmt.setInt(3, endrow);
 						}
 					rs = pstmt.executeQuery();
 					while(rs.next()) {
 						BoardBean boardBean = new BoardBean();
-						boardBean.setMEMBER_ID(rs.getString(1));
-						boardBean.setBOARD_NUM(rs.getInt(2));
-						boardBean.setBOARD_SUBJECT(rs.getString(3));
-						boardBean.setBOARD_DATE(rs.getDate(4));
-						boardBean.setBOARD_VIDEO_FILE(rs.getString(5));
-						boardBean.setBOARD_VIDEO_URL(rs.getString(6));
-						boardBean.setBOARD_READCOUNT(rs.getInt(7));
-						boardBean.setBOARD_LIKECOUNT(rs.getInt(8));
-						boardBean.setBOARD_REPORTCOUNT(rs.getInt(9));
-						boardBean.setBOARD_TAG(rs.getString(10));
-						boardBean.setBOARD_CATEGORY(rs.getString(11));
-						boardBean.setBOARD_BLIND(rs.getInt(12));
-						boardBean.setBOARD_YOUTUBE_ID(rs.getString(13));
+						boardBean.setMEMBER_ID(rs.getString("MEMBER_ID"));
+						boardBean.setBOARD_NUM(rs.getInt("BOARD_NUM"));
+						boardBean.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
+						boardBean.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+						boardBean.setBOARD_VIDEO_FILE(rs.getString("BOARD_FILE"));
+						boardBean.setBOARD_VIDEO_URL(rs.getString("BOARD_URL"));
+						boardBean.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
+						boardBean.setBOARD_LIKECOUNT(rs.getInt("BOARD_LIKECOUNT"));
+						boardBean.setBOARD_REPORTCOUNT(rs.getInt("BOARD_REPORTCOUNT"));
+						boardBean.setBOARD_TAG(rs.getString("BOARD_TAG"));
+						boardBean.setBOARD_CATEGORY(rs.getString("BOARD_CATEGORY"));
+						boardBean.setBOARD_BLIND(rs.getInt("BOARD_BLIND"));
+						boardBean.setBOARD_YOUTUBE_ID(rs.getString("BOARD_YOUTUBE_ID"));
 						boardList.add(boardBean);						
 					}		
 			} catch(Exception e) {
@@ -330,36 +330,42 @@ public class BoardDAO {
 	}
 	/**3.조회수 정렬에 사용하는 메소드 카테고리 값이 있으면 카테고리도 함께 저장
 	 * 없으면 조회수 정렬만 저장*/
-	public ArrayList<BoardBean> getReadList(BoardBean category) {	
-		String sql1 = "SELECT * FROM BOARD WHERE BOARD_CATEGORY=? ORDER BY BOARD_READCOUNT DESC"; //카테고리 값을 가진 보드 테이블을 조회 순서로 조회
-		String sql2 = "SELECT * FROM BOARD ORDER BY BOARD_READCOUNT DESC";//보드 테이블을 조회 순서로 조회
-		ArrayList<BoardBean> boardList =new ArrayList<BoardBean>();			
-			try {
-				if(category.getBOARD_CATEGORY().equals("")) {
-					pstmt = con.prepareStatement(sql2); //조회만함
-					System.out.println("test11");
-				}else {
-					pstmt = con.prepareStatement(sql1);
-					System.out.println(category.getBOARD_CATEGORY());//보드테이블에 카테고리값을 넘김
-					pstmt.setString(1, category.getBOARD_CATEGORY());
-					}
-				rs = pstmt.executeQuery();					
+	public ArrayList<BoardBean> getReadList(BoardBean category,int page, int limit) {	
+		String sql1 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_READCOUNT DESC) V1)V2 WHERE BOARD_CATEGORY=? AND V2.RN2 BETWEEN ? AND ?";
+		String sql2 = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_READCOUNT DESC) V1)V2 WHERE V2.RN2 BETWEEN ? AND ?";    //보드 테이블을 추천 순서로 조회
+		ArrayList<BoardBean> boardList =new ArrayList<BoardBean>();		
+		int startrow = (page - 1) * limit + 1;
+		int endrow = page * limit;
+				try {
+					if(category.getBOARD_CATEGORY().equals("")) {
+						pstmt = con.prepareStatement(sql2); //조회만함
+						pstmt.setInt(1, startrow);
+						pstmt.setInt(2, endrow);
+						System.out.println("test11");
+					}else {
+						pstmt = con.prepareStatement(sql1);
+						System.out.println(category.getBOARD_CATEGORY());//보드테이블에 카테고리값을 넘김
+						pstmt.setString(1, category.getBOARD_CATEGORY());
+						pstmt.setInt(2, startrow);
+						pstmt.setInt(3, endrow);
+						}
+					rs = pstmt.executeQuery();
 				while(rs.next()) {
 					BoardBean boardBean = new BoardBean();
-					boardBean.setMEMBER_ID(rs.getString(1));
-					boardBean.setBOARD_NUM(rs.getInt(2));
-					boardBean.setBOARD_SUBJECT(rs.getString(3));
-					boardBean.setBOARD_DATE(rs.getDate(4));
-					boardBean.setBOARD_VIDEO_FILE(rs.getString(5));
-					boardBean.setBOARD_VIDEO_URL(rs.getString(6));
-					boardBean.setBOARD_READCOUNT(rs.getInt(7));
-					boardBean.setBOARD_LIKECOUNT(rs.getInt(8));
-					boardBean.setBOARD_REPORTCOUNT(rs.getInt(9));
-					boardBean.setBOARD_TAG(rs.getString(10));
-					boardBean.setBOARD_CATEGORY(rs.getString(11));
-					boardBean.setBOARD_BLIND(rs.getInt(12));
-					boardBean.setBOARD_YOUTUBE_ID(rs.getString(13));
-					boardList.add(boardBean);					
+					boardBean.setMEMBER_ID(rs.getString("MEMBER_ID"));
+					boardBean.setBOARD_NUM(rs.getInt("BOARD_NUM"));
+					boardBean.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
+					boardBean.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+					boardBean.setBOARD_VIDEO_FILE(rs.getString("BOARD_FILE"));
+					boardBean.setBOARD_VIDEO_URL(rs.getString("BOARD_URL"));
+					boardBean.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
+					boardBean.setBOARD_LIKECOUNT(rs.getInt("BOARD_LIKECOUNT"));
+					boardBean.setBOARD_REPORTCOUNT(rs.getInt("BOARD_REPORTCOUNT"));
+					boardBean.setBOARD_TAG(rs.getString("BOARD_TAG"));
+					boardBean.setBOARD_CATEGORY(rs.getString("BOARD_CATEGORY"));
+					boardBean.setBOARD_BLIND(rs.getInt("BOARD_BLIND"));
+					boardBean.setBOARD_YOUTUBE_ID(rs.getString("BOARD_YOUTUBE_ID"));
+					boardList.add(boardBean);				
 				}			
 		} catch(Exception e) {
 			System.out.println("readlist 오류"+e);
@@ -427,30 +433,36 @@ public class BoardDAO {
 		return commentList;
 	}
 	/** 6.카테고리 별로 목록을 출력시키는 메소드*/
-	public ArrayList<BoardBean> getCategory(BoardBean category) {	
-		String sql = "SELECT * FROM BOARD WHERE BOARD_CATEGORY=?"; //해당 카테고리의 보드 테이블 조회
-		ArrayList<BoardBean> boardList =new ArrayList<BoardBean>();
+	public ArrayList<BoardBean> getCategory(BoardBean category , int page, int limit) {
+		String sql = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_DATE DESC) V1)V2 WHERE BOARD_CATEGORY=? AND V2.RN2 BETWEEN ? AND ?";
+
+		int startrow = (page - 1) * limit + 1;
+		int endrow = page * limit;
+
+		ArrayList<BoardBean> boardList = new ArrayList<BoardBean>();
 				try {
 					pstmt = con.prepareStatement(sql);
 					System.out.println(category.getBOARD_CATEGORY()); //객체에서 받아온 카테고리값 저장
 					pstmt.setString(1, category.getBOARD_CATEGORY());
+					pstmt.setInt(2, startrow);
+					pstmt.setInt(3, endrow);
 					rs = pstmt.executeQuery();				
 					while(rs.next()) {
 						BoardBean boardBean = new BoardBean();
-						boardBean.setMEMBER_ID(rs.getString(1));
-						boardBean.setBOARD_NUM(rs.getInt(2));
-						boardBean.setBOARD_SUBJECT(rs.getString(3));
-						boardBean.setBOARD_DATE(rs.getDate(4));
-						boardBean.setBOARD_VIDEO_FILE(rs.getString(5));
-						boardBean.setBOARD_VIDEO_URL(rs.getString(6));
-						boardBean.setBOARD_READCOUNT(rs.getInt(7));
-						boardBean.setBOARD_LIKECOUNT(rs.getInt(8));
-						boardBean.setBOARD_REPORTCOUNT(rs.getInt(9));
-						boardBean.setBOARD_TAG(rs.getString(10));
-						boardBean.setBOARD_CATEGORY(rs.getString(11));
-						boardBean.setBOARD_BLIND(rs.getInt(12));
-						boardBean.setBOARD_YOUTUBE_ID(rs.getString(13));
-						boardList.add(boardBean);					
+						boardBean.setMEMBER_ID(rs.getString("MEMBER_ID"));
+						boardBean.setBOARD_NUM(rs.getInt("BOARD_NUM"));
+						boardBean.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
+						boardBean.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+						boardBean.setBOARD_VIDEO_FILE(rs.getString("BOARD_FILE"));
+						boardBean.setBOARD_VIDEO_URL(rs.getString("BOARD_URL"));
+						boardBean.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
+						boardBean.setBOARD_LIKECOUNT(rs.getInt("BOARD_LIKECOUNT"));
+						boardBean.setBOARD_REPORTCOUNT(rs.getInt("BOARD_REPORTCOUNT"));
+						boardBean.setBOARD_TAG(rs.getString("BOARD_TAG"));
+						boardBean.setBOARD_CATEGORY(rs.getString("BOARD_CATEGORY"));
+						boardBean.setBOARD_BLIND(rs.getInt("BOARD_BLIND"));
+						boardBean.setBOARD_YOUTUBE_ID(rs.getString("BOARD_YOUTUBE_ID"));
+						boardList.add(boardBean);			
 					}			
 			} catch(Exception e) {
 				System.out.println("categorylist 오류"+e);
@@ -637,29 +649,34 @@ public class BoardDAO {
 
 		return deleteResult;
 	}
-	public ArrayList<BoardBean> listSearch(BoardBean search) {
-		String sql = "SELECT * FROM BOARD WHERE BOARD_SUBJECT LIKE ? OR BOARD_TAG LIKE ?";
+	
+	public ArrayList<BoardBean> listSearch(BoardBean search, int page, int limit) {
+		String sql = "SELECT * FROM (SELECT ROWNUM RN2, V1. * FROM (SELECT * FROM BOARD ORDER BY BOARD_DATE DESC) V1)V2 WHERE BOARD_SUBJECT LIKE ? OR BOARD_TAG LIKE ? AND V2.RN2 BETWEEN ? AND ?";
+		int startrow = (page - 1) * limit + 1;
+		int endrow = page * limit;
 		ArrayList<BoardBean> boardList =new ArrayList<BoardBean>();
 		try { 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search.getBOARD_SUBJECT()+"%");
 			pstmt.setString(2, "%"+search.getBOARD_TAG()+"%");
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, endrow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardBean boardBean = new BoardBean();
-				boardBean.setMEMBER_ID(rs.getString(1));
-				boardBean.setBOARD_NUM(rs.getInt(2));
-				boardBean.setBOARD_SUBJECT(rs.getString(3));
-				boardBean.setBOARD_DATE(rs.getDate(4));
-				boardBean.setBOARD_VIDEO_FILE(rs.getString(5));
-				boardBean.setBOARD_VIDEO_URL(rs.getString(6));
-				boardBean.setBOARD_READCOUNT(rs.getInt(7));
-				boardBean.setBOARD_LIKECOUNT(rs.getInt(8));
-				boardBean.setBOARD_REPORTCOUNT(rs.getInt(9));
-				boardBean.setBOARD_TAG(rs.getString(10));
-				boardBean.setBOARD_CATEGORY(rs.getString(11));
-				boardBean.setBOARD_BLIND(rs.getInt(12));
-				boardBean.setBOARD_YOUTUBE_ID(rs.getString(13));
+				boardBean.setMEMBER_ID(rs.getString("MEMBER_ID"));
+				boardBean.setBOARD_NUM(rs.getInt("BOARD_NUM"));
+				boardBean.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
+				boardBean.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+				boardBean.setBOARD_VIDEO_FILE(rs.getString("BOARD_FILE"));
+				boardBean.setBOARD_VIDEO_URL(rs.getString("BOARD_URL"));
+				boardBean.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
+				boardBean.setBOARD_LIKECOUNT(rs.getInt("BOARD_LIKECOUNT"));
+				boardBean.setBOARD_REPORTCOUNT(rs.getInt("BOARD_REPORTCOUNT"));
+				boardBean.setBOARD_TAG(rs.getString("BOARD_TAG"));
+				boardBean.setBOARD_CATEGORY(rs.getString("BOARD_CATEGORY"));
+				boardBean.setBOARD_BLIND(rs.getInt("BOARD_BLIND"));
+				boardBean.setBOARD_YOUTUBE_ID(rs.getString("BOARD_YOUTUBE_ID"));
 				boardList.add(boardBean);				
 			}
 		}catch(Exception e){
