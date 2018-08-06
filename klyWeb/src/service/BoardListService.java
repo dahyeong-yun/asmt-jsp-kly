@@ -1,6 +1,7 @@
 package service;
 
 import static db.JDBCUtil.getConnection;
+
 import static db.JDBCUtil.close;
 
 
@@ -21,36 +22,79 @@ public class BoardListService {
 			close(con);
 			return boardlist;
 		}
-	/** */
-	public ArrayList<BoardBean> getReadList(BoardBean category) {
+	public ArrayList<BoardBean> getboardlist(int page, int limit){
 		Connection con = getConnection();
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		boardDAO.setConnection(con);
 		
-		ArrayList<BoardBean> boardlist = boardDAO.getReadList(category);
+		ArrayList<BoardBean> boardlist = boardDAO.getboardList(page, limit);
 		close(con);
 		return boardlist;
 	}
-	public ArrayList<BoardBean> getLikeList(BoardBean category) {
+	/** */
+	public ArrayList<BoardBean> getReadList(BoardBean category, int page, int limit) {
+		Connection con = getConnection();
+		BoardDAO boardDAO = BoardDAO.getInstance();
+		boardDAO.setConnection(con);
+		
+		ArrayList<BoardBean> boardlist = boardDAO.getReadList(category,page,limit);
+		close(con);
+		return boardlist;
+	}
+	public ArrayList<BoardBean> getLikeList(BoardBean category, int page, int limit) {
 		Connection con = getConnection();
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		boardDAO.setConnection(con);
 		
 		
-		ArrayList<BoardBean> boardlist = boardDAO.getLikeList(category);
+		ArrayList<BoardBean> boardlist = boardDAO.getLikeList(category,page,limit);
 		close(con);
 		return boardlist;
 	}
 	
-	public ArrayList<BoardBean> getCategory(BoardBean category) {
+	public ArrayList<BoardBean> getCategory(BoardBean category, int page, int limit) {
 		Connection con = getConnection();
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		boardDAO.setConnection(con);
 		
 		
-		ArrayList<BoardBean> boardList = boardDAO.getCategory(category);
+		ArrayList<BoardBean> boardList = boardDAO.getCategory(category,page,limit);
 		close(con);
 		return boardList;
 	}
+	public int getListCategoryCount(BoardBean category) {
 
+		Connection con = getConnection();
+		BoardDAO boardDAO = BoardDAO.getInstance();
+		boardDAO.setConnection(con);
+		
+		int listCount =0;
+		listCount = boardDAO.getListCategoryCount(category);
+		close(con);
+		return listCount;
+	}
+	public int getListSearchCount(BoardBean search) {
+
+		Connection con = getConnection();
+		BoardDAO boardDAO = BoardDAO.getInstance();
+		boardDAO.setConnection(con);
+		
+		int listCount =0;
+		listCount = boardDAO.getListSearchCount(search);
+		close(con);
+		return listCount;
+	}
+	public int getListCount(BoardBean category) {
+ 
+		Connection con = getConnection();
+		BoardDAO boardDAO = BoardDAO.getInstance();
+		boardDAO.setConnection(con);
+		
+		int listCount =0;
+		listCount = boardDAO.getListCount(category);
+		close(con);
+		return listCount;
+	}
+	
+	
 }

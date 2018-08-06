@@ -2,9 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="bean.BoardBean"%>
 <%@ page import="bean.CommentBean"%>
+<%@ page import="bean.PageInfo"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+	ArrayList<BoardBean> boardList = (ArrayList<BoardBean>) request.getAttribute("boardlist");
+	//페이징 정보 가져오기
+	PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
+	int nowPage = pageInfo.getPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int maxPage = pageInfo.getMaxPage();
+	int listCount = pageInfo.getListCount();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,16 +61,27 @@ body {
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
 
+=======
+<script type="text/javascript">
+	
+</script>
+>>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
 <title>Title</title>
 </head>
 
 <body>
 	<!-- 상단바(footer) -->
 	<%@include file="./navbarTemplate.jsp"%>
+<<<<<<< HEAD
 	
 	<!--리스트 페이지의 몸통부분(article) -->
 	<div class="main" style="height: 100%; width: 1920px">
+=======
+	<!--리스트 페이지의 몸통부분 -->
+	<div class="main" style="height: 1080px; width: 1920px">
+>>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
 		<!--몸통부분의 왼쪽 부분으로 동영상을 분류 별로 선택해서 보는 기능 으로 
 	category 값을 BoardCategoryAction 으로 넘김  -->
 		<div class="bg-light" id="leftbody"
@@ -103,13 +125,15 @@ body {
 					<input type="text" class="form-control" placeholder="Search"
 						name="search" id="search">
 					<div class="input-group-append">
-						<button class="btn btn-success" type="button" onclick="searchCheck()">검색</button>
+						<button class="btn btn-success" type="button"
+							onclick="searchCheck()">검색</button>
 					</div>
 				</div>
 			</form>
 		</div>
-		
+
 		<script>
+<<<<<<< HEAD
 		/* 검색어 제한 함수 */
 		function searchCheck() {
 			var search = document.getElementById("search");
@@ -117,8 +141,20 @@ body {
 				alert('검색 값을 입력해주세요.')
 			} else {
 				document.getElementById("searchForm").submit();
+=======
+			function searchCheck() {
+				var search = document.getElementById("search");
+				if (search.value == "") {
+					alert('검색 값을 입력해주세요.')
+				} else {
+					document.getElementById("searchForm").submit();
+				}
+>>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
 			}
+<<<<<<< HEAD
 		}
+=======
+>>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
 		</script>
 		
 		<!-- 조회 수,추천 수 중 정렬기준을 정하는 기능 array와 category 값을 같이넘겨서 카테고리 내에서도 정렬 기준을 선택 할 수 있음(전체목록 정렬이 안됨)-->
@@ -172,7 +208,7 @@ body {
 										<div class="btn-group" style="text-align: right; width: 420px">
 											<img class="btn-img" src="./images/report.jpg"
 												onclick="location='boardReport.kly?board_num=${board.BOARD_NUM}&member_id=${loginInfo.MEMBER_ID}'">
-											 &nbsp;<img class="btn-img" src="./images/delete.png"
+											&nbsp;<img class="btn-img" src="./images/delete.png"
 												onclick="location='boardDelete.kly?board_num=${board.BOARD_NUM}&member_id=${loginInfo.MEMBER_ID}'">
 										</div>
 										<span style="color: cadetblue;"><img
@@ -251,6 +287,54 @@ body {
 					<c:set var="i" value="${i+1 }" />
 				</c:forEach>
 			</table>
+			<div style="text-align: center">
+				<%
+					if (nowPage <= 1) {
+				%>
+				<button type="button" class="btn btn-outline-info">이전</button>
+				&nbsp;
+				<%
+					} else {
+				%>
+				<button type="button" class="btn btn-outline-info"
+					onclick="location='boardList.kly?page=<%=nowPage - 1%>'">이전</button>
+				<%
+					}
+				%>
+				<div class="btn-group">
+					<%
+					for (int a = startPage; a <= endPage; a++) {
+						if (a == nowPage) {
+				%>
+					<button type="button" class="btn btn-info"><%=a%></button>
+					<%
+					} else {
+				%>
+					<button type="button" class="btn btn-outline-info"
+						onclick="location='boardList.kly?page=<%=a%>'"><%=a%></button>
+					&nbsp;
+					<%
+					}
+				%>
+					<%
+					}
+				%>
+				</div>
+				<%
+					if (nowPage >= maxPage) {
+				%>
+				<button type="button" class="btn btn-outline-info">다음</button>
+				<%
+					} else {
+				%>
+				<button type="button" class="btn btn-outline-info"
+					onclick="location='boardList.kly?page=<%=nowPage + 1%>'">다음</button>
+				<%
+					}
+				%>
+
+
+			</div>
 		</div>
 	</div>
 
@@ -270,7 +354,7 @@ body {
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h4 class="modal-title">Modal Heading</h4>
+						<h4 class="modal-title">게시물 등록</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
@@ -301,19 +385,27 @@ body {
 						</div>
 
 						<div id="video">
+<<<<<<< HEAD
 							<label for="video_upload">동영상 올리기</label>
 							<input type="radio" id="video_upload" name="videoFile" value="upload" 
 							onclick="switchDisplay('input_upload');">
 							
 							<label for="video">URL</label>
 							<input type="radio" id="video_URL" name="videoURL" value="url" checked="checked"
+=======
+							<label for="video_upload">동영상 링크</label><!-- <input type="radio"
+								id="video_upload" name="videoFile" value="upload"
+								onclick="switchDisplay('input_upload');"> <label
+								for="video">URL</label> <input type="radio" id="video_URL"
+								name="videoURL" value="url"
+>>>>>>> branch 'master' of https://github.com/dahyeong-yun/kly.git
 								onclick="switchDisplay('input_url');">
 
 							<div id="input_upload" style="display: none">
 								<input type="file" name="file">
-							</div>
+							</div> -->
 
-							<div id="input_url" style="display: none">
+							<div id="input_url">
 								<input type="url" class="form-control" name="video_URL"
 									value="https://">
 							</div>
@@ -352,7 +444,7 @@ body {
 		}
 
 		/*동영상 첨부 방식선택*/
-		function switchDisplay(select) {
+		/* function switchDisplay(select) {
 			if (select == "input_upload") {
 				document.getElementById("input_upload").style.display = "";
 				document.getElementById("input_url").style.display = 'none';
@@ -360,7 +452,7 @@ body {
 				document.getElementById("input_upload").style.display = 'none';
 				document.getElementById("input_url").style.display = "";
 			}
-		}
+		} */
 	</script>
 
 </body>
