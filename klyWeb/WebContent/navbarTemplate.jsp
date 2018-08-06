@@ -20,7 +20,7 @@
 <%
 
 %>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-fixed-top">
         <!-- Brand/logo -->
         <a href="./index.jsp"><img src="./images/kly_logo_white.png" style="height: 45px" /></a>
 
