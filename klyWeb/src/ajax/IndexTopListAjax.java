@@ -44,6 +44,7 @@ public class IndexTopListAjax implements Ajax {
 						+ "[\"" + topReadcountList.get(i).getBOARD_NUM() +"\","
 						+ "\"https://img.youtube.com/vi/"+topReadcountList.get(i).getBOARD_YOUTUBE_ID()+"/0.jpg\","
 						+ "\"" + topReadcountList.get(i).getBOARD_SUBJECT() +"\","
+						+ "\"" + topReadcountList.get(i).getBOARD_LIKECOUNT() +"\","
 						+ "\"" + topReadcountList.get(i).getBOARD_READCOUNT() +"\"]"
 						);
 			} else {
@@ -51,6 +52,7 @@ public class IndexTopListAjax implements Ajax {
 						+ "[\"" + topReadcountList.get(i).getBOARD_NUM() +"\","
 						+ "\"https://img.youtube.com/vi/"+topReadcountList.get(i).getBOARD_YOUTUBE_ID()+"/0.jpg\","
 						+ "\"" + topReadcountList.get(i).getBOARD_SUBJECT() +"\","
+						+ "\"" + topReadcountList.get(i).getBOARD_LIKECOUNT() +"\","
 						+ "\"" + topReadcountList.get(i).getBOARD_READCOUNT() +"\"], "
 						);
 			}

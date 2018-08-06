@@ -36,6 +36,7 @@ public class IndexLikeListAjax implements Ajax {
 						+ "[\"" + topLikecountList.get(i).getBOARD_NUM() +"\","
 						+ "\"https://img.youtube.com/vi/"+topLikecountList.get(i).getBOARD_YOUTUBE_ID()+"/0.jpg\","
 						+ "\"" + topLikecountList.get(i).getBOARD_SUBJECT() +"\","
+						+ "\"" + topLikecountList.get(i).getBOARD_LIKECOUNT() +"\","
 						+ "\"" + topLikecountList.get(i).getBOARD_READCOUNT() +"\"]"
 						);
 			} else {
@@ -43,6 +44,7 @@ public class IndexLikeListAjax implements Ajax {
 						+ "[\"" + topLikecountList.get(i).getBOARD_NUM() +"\","
 						+ "\"https://img.youtube.com/vi/"+topLikecountList.get(i).getBOARD_YOUTUBE_ID()+"/0.jpg\","
 						+ "\"" + topLikecountList.get(i).getBOARD_SUBJECT() +"\","
+						+ "\"" + topLikecountList.get(i).getBOARD_LIKECOUNT() +"\","
 						+ "\"" + topLikecountList.get(i).getBOARD_READCOUNT() +"\"], "
 						);
 			}
