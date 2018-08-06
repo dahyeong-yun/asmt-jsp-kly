@@ -55,7 +55,7 @@ public class EmailAuthAction implements Action {
 			script.close();
 		}
 		
-		String host = "http://localhost:8081/klyWeb/";
+		String host = "http://192.168.0.132:8081/klyWeb/";
 		String from = "gryb809@gmail.com";
 		String to = eas.getUserEmail(memberID); // 유저의 가입 이메일 가져오기.
 		
