@@ -211,7 +211,7 @@
 		}
 	}
 	
-	/* */
+	/* 가입 버튼 */
 	function join() {
 		var email = $("#inputEmail").val();
 		if(overlap==0) {

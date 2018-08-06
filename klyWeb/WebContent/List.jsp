@@ -373,12 +373,12 @@ body {
 							<!-- <input type="text" name="tagnames" id="tagnames" class="box_input _click(TagValidator|TagNames) _keyup(TagValidator|ValidateTagNames) _blur(TagValidator|ValidateTagNames)"> -->
 						</div>
 
-					</div>
-
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">등록</button>
-						<!-- data-dismiss="modal" -->
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">등록</button>
+							<!-- data-dismiss="modal" -->
+						</div>
+					
 					</div>
 				</div>
 			</div>
