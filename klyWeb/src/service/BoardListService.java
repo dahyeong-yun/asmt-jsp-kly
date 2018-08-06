@@ -62,15 +62,39 @@ public class BoardListService {
 		close(con);
 		return boardList;
 	}
-	public int getListCount() {
+	public int getListCategoryCount(BoardBean category) {
 
 		Connection con = getConnection();
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		boardDAO.setConnection(con);
 		
 		int listCount =0;
-		listCount = boardDAO.getListCount();
+		listCount = boardDAO.getListCategoryCount(category);
 		close(con);
 		return listCount;
 	}
+	public int getListSearchCount(BoardBean search) {
+
+		Connection con = getConnection();
+		BoardDAO boardDAO = BoardDAO.getInstance();
+		boardDAO.setConnection(con);
+		
+		int listCount =0;
+		listCount = boardDAO.getListSearchCount(search);
+		close(con);
+		return listCount;
+	}
+	public int getListCount(BoardBean category) {
+ 
+		Connection con = getConnection();
+		BoardDAO boardDAO = BoardDAO.getInstance();
+		boardDAO.setConnection(con);
+		
+		int listCount =0;
+		listCount = boardDAO.getListCount(category);
+		close(con);
+		return listCount;
+	}
+	
+	
 }

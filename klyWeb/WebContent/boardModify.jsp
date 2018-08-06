@@ -36,7 +36,7 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Modal Heading</h4>
+                            <h4 class="modal-title">게시물 등록</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
@@ -60,22 +60,23 @@
                                 <input type="text" class="form-control" name="subject" placeholder="게시글 제목을 입력하세요" required>
                             </div>
 
-                            <div id="video">
-                                <label for="video_upload">동영상 올리기</label>
-                                <input type = "radio" id="video_upload" name="select_video" value="upload" onclick="switchDisplay('input_upload');">
-                                
-                                <label for="video_URL">URL</label>
-                                <input type="radio" id="video_URL" name="select_video" value="url" onclick="switchDisplay('input_url');">
+                           <div id="video">
+							<label for="video_upload">동영상 링크</label><!-- <input type="radio"
+								id="video_upload" name="videoFile" value="upload"
+								onclick="switchDisplay('input_upload');"> <label
+								for="video">URL</label> <input type="radio" id="video_URL"
+								name="videoURL" value="url"
+								onclick="switchDisplay('input_url');">
 
-                                <div id="input_upload" style="display:none">
-                                    <input type="file" name="file">
-                                </div>
+							<div id="input_upload" style="display: none">
+								<input type="file" name="file">
+							</div> -->
 
-                                <div id="input_url" style="display:none">
-                                    <input type="url" class="form-control" name="link" placeholder="http://">
-                                </div>
-
-                            </div>
+							<div id="input_url">
+								<input type="url" class="form-control" name="video_URL"
+									value="http://">
+							</div>
+						</div>
 
 
                             <div id="tag">
@@ -113,7 +114,7 @@
 	}
 
     /*동영상 첨부 방식선택*/
-    function switchDisplay(select) {
+    /* function switchDisplay(select) {
         if (select == "input_upload") {
             document.getElementById("input_upload").style.display = "";
             document.getElementById("input_url").style.display = 'none';
@@ -121,7 +122,7 @@
              document.getElementById("input_upload").style.display = 'none';
             document.getElementById("input_url").style.display = "";
         }
-    }
+    } */
 
 </script>
 

@@ -32,7 +32,7 @@ public class BoardListAction implements Action {
 		}
 		System.out.println((page - 1) * limit + 1);
 		// 전체 글 갯수를 가져오기 위한 Listservice 클래스의 메소드 호출
-		int listCount = boardListService.getListCount();
+		int listCount = boardListService.getListCount(null);
 
 		// 내용만 가져오는 방법
 		// ArrayList<boardbean> boardlist = boardlistservice.getboardlist();
@@ -59,7 +59,6 @@ public class BoardListAction implements Action {
 		pageInfo.setListCount(listCount);
 
 		request.setAttribute("pageInfo", pageInfo);
-
 		request.setAttribute("boardlist", boardList);
 		request.setAttribute("commentlist", commentList);
 		actionForward = new ActionForward();
