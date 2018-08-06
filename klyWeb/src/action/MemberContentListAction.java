@@ -69,7 +69,7 @@ public class MemberContentListAction implements Action{
 				forward.setPath("./myPageList.jsp");
 			} else {
 				out.println("<script>");
-				out.println("alert('댓글 조회를 실패했습니다.')");
+				out.println("alert('추천 게시물 조회를 실패했습니다.')");
 				out.println("location.href='./myPageList.jsp';");
 				out.println("</script>");
 				out.close();

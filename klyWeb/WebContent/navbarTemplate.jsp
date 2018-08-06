@@ -116,6 +116,7 @@
 		                            	<div class="row">
 											<div class="col-sm-9">
 		                                		<input class="form-control" name="MEMBER_ID" type="text" maxlength="5" id="joinId" placeholder="아이디를 입력해 주세요." />
+		                                		<input class="form-control" name="memberID" type="hidden" maxlength="5" id="tempId" placeholder="아이디를 입력해 주세요." />
 											</div>
 									
 											<div class="col-sm-3">
@@ -167,7 +168,7 @@
 			console.log("null if문 실행")
 			alert('id를 입력해주세요');
 			return;
-		} else if(id.value.match(/[가-힣ㄱ-ㅎ]/)) {
+		} else if(id.value.match(/[가-힣ㄱ-ㅎㅏ-ㅣ]/)) {
 			alert('아이디는 한글을 제외해 주세요.');
 			return;
 		}
@@ -185,7 +186,8 @@
 					var checkbutton = document.getElementById("checkButton");
 					checkbutton.className += " disabled";
 					id.disabled = true;
-					console.log('버튼 비활성화 완료')
+					console.log('버튼 비활성화 완료');
+					document.getElementById("tempId").value = id.value;
 				}
 			}
 		}

@@ -17,7 +17,7 @@ public class MemberJoinAction implements Action {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		//request 객체의 정보 가져오기(가입정보)
-		String id = request.getParameter("MEMBER_ID");
+		String id = request.getParameter("memberID");
 		String pwd = request.getParameter("MEMBER_PW");
 		String email = request.getParameter("MEMBER_EMAIL");
 		

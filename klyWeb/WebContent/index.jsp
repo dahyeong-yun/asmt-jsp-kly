@@ -122,7 +122,7 @@
 						<div class="input-group">
 							<input type="text" class="form-control" name="search" placeholder="검색어를 입력해 주세요.">
 							<div class="input-group-append">
-								<button type="submit" class="btn btn-success">검색</button>
+								<button type="button" onclick="searchCheck()" class="btn btn-success">검색</button>
 							</div>
 						</div>
 					</div>
@@ -131,6 +131,17 @@
 			<div class="col-lg-4 col-md-3"></div>
 		</div>
 		
+		<script>
+		/* 검색어 제한 함수 */
+		function searchCheck() {
+			var search = document.getElementById("search");
+			if(search.value == "") {
+				alert('검색 값을 입력해주세요.')
+			} else {
+				document.getElementById("searchForm").submit();
+			}
+		}
+		</script>
 	
 		<div class="row my-3">
 			<div class="col-lg-6">

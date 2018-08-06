@@ -72,7 +72,7 @@
 	                                <input class="form-control" type="text" readonly="readonly" value="${loginInfo.getMEMBER_ID()}"/>
 	                           </div>
 	                        </div>
-	                        
+
 	                        <div class="row mb-3">
 	                            <div class="col-sm-3" style="text-align: center;">
 	                                <label><h5>현재 비밀번호</h5></label>
@@ -81,6 +81,7 @@
 	                                <input class="form-control" name="currentPassword" type="text" placeholder="현재 비밀번호를 입력해 주세요."/>
 	                           </div>
 	                        </div>
+
 	                        <div class="row mb-3">
 	                            <div class="col-sm-3" style="text-align: center;">
 	                                <label><h5>바꿀 비밀번호</h5></label>
@@ -89,6 +90,7 @@
 	                                <input class="form-control" name="changePassword" type="text" placeholder="바꿀 비밀번호를 입력해 주세요."/>
 	                           </div>
 	                        </div>
+
 	                        <div class="row mb-3">
 	                            <div class="col-sm-3" style="text-align: center;">
 	                                <label><h5>비밀번호 확인</h5></label>
@@ -97,6 +99,7 @@
 	                                <input class="form-control" type="text" placeholder="바꿀 비밀번호를 한번 더 입력해 주세요."/>
 	                           </div>
 	                        </div>
+
 	                        <div class="row mb-3">
 	                            <div class="col-sm-3" style="text-align: center;">
 	                                <label><h5>이메일</h5></label>
@@ -105,7 +108,7 @@
 	                                <input class="form-control" type="text" readonly="readonly" value="${loginInfo.getMEMBER_EMAIL()}"/>
 	                           </div>
 	                        </div>
-	                        
+
 	                        <div class="row text-right">
 	                            <div class="col">
 	                                <button class="btn btn-primary" type="submit">비밀 번호 변경</button>

@@ -91,7 +91,7 @@ public class MemberController extends HttpServlet {
 
 		/** command에 따른 ActionForward 인스턴스 생성 */
 		
-			// 1) 회원가입
+			// 1) 회원가입_상단 바 
 		if (command.equals("/memberJoin.kly")) {
 			action = new MemberJoinAction();
 			try {
@@ -99,7 +99,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 메인 페이지 조회 수 내림차순 리스트 
+			// 2) 조회 수 내림차순 리스트_메인 페이지 
 		} else if (command.equals("/indexTopList.kly")) {
 			ajax = new IndexTopListAjax();
 			try {
@@ -108,7 +108,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 메인 페이지 추천 수 내림차순 리스트
+			// 2) 추천 수 내림차순 리스트_메인 페이지
 		} else if (command.equals("/indexLikeList.kly")) {
 			ajax = new IndexLikeListAjax();
 			try {
@@ -117,7 +117,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 아이디 중복체크
+			// 1) 아이디 중복체크_상단 바
 		} else if (command.equals("/idOverlapCheck.kly")) {
 			ajax = new IdOverlapCheckAjax();
 			try {
@@ -126,7 +126,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 가입 시, 이메일 인증
+			// 1) 회원 가입 시, 이메일 인증_상단 바
 		} else if (command.equals("/emailAuthAction.kly")) {
 			action = new EmailAuthAction();
 			try {
@@ -134,7 +134,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 이메일 인증 메일에서 이메일 인증
+			// 1) 이메일 인증_상단 바(회원 인증 메일)
 		} else if (command.equals("/emailCheckedAction.kly")) {
 			action = new EmailCheckedAction();
 			try {
@@ -142,7 +142,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 로그인
+			// 1) 회원 로그인_상단 바
 		} else if (command.equals("/memberLogin.kly")) {
 			action = new MemberLoginAction();
 			try {
@@ -150,7 +150,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 로그아웃
+			// 1) 회원 로그아웃_상단 바
 		} else if (command.equals("/memberLogout.kly")) {
 			action = new MemberLogoutAction();
 			try {
@@ -158,7 +158,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 비밀번호 찾기
+			// 1) 회원 비밀번호 찾기_상단 바
 		} else if (command.equals("/memberFindPass.kly")) {
 			action = new MemberFindPassAction();
 			try {
@@ -166,7 +166,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 비밀번호 찾기 했을 경우, 비밀번호 초기화
+			// 1) 회원 비밀번호 찾기 했을 경우, 비밀번호 초기화_상단 바
 		} else if (command.equals("/memberInitPass.kly")) { //
 			action = new MemberInitPassAction();
 			try {
@@ -174,7 +174,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 정보(마이페이지)
+			// 3) 회원 정보_마이페이지
 		} else if (command.equals("/memberDetail.kly")) {
 			action = new MemberDetailAction();
 			try {
@@ -182,7 +182,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 탈퇴
+			// 3) 회원 탈퇴_마이페이지
 		} else if (command.equals("/memberDrop.kly")) {
 			action = new MemberDropAction();
 			try {
@@ -190,7 +190,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 정보 변경
+			// 3) 회원 정보 변경_마이페이지
 		} else if (command.equals("/memberInfoRivision.kly")) {
 			action = new MemberModifyAction();
 			try {
@@ -198,7 +198,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 임시 비밀번호로 로그인 후 비밀번호 변경 시
+			// 1) 회원 임시 비밀번호로 로그인 후 비밀번호 변경 시_상단 바
 		} else if (command.equals("/memberInfoRivisionFromTemp.kly")) {
 			action = new MemberModifyFromTempAction();
 			try {
@@ -206,7 +206,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 게시물 리스트(마이페이지)
+			// 3) 회원 게시물 리스트_마이페이지
 		}else if (command.equals("/myContent.kly")) {
 			action = new MemberContentListAction();
 			try {
@@ -214,7 +214,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// 1) 회원 게시물 등록
+			// 4) 회원 게시물 등록
 		} else if (command.equals("/boardWrite.kly")) {
 			action = new BoardWriteAction();
 			try {
@@ -222,6 +222,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 리스_리스트 페이지
 		} else if (command.equals("/boardList.kly")) {
 			action = new BoardListAction();
 			try {
@@ -229,6 +230,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 1) 관리자 댓글 리스트(관리자 페이지)
 		} else if (command.equals("/adminComment.kly")) {
 			action = new AdminCommentListAction();
 			try {
@@ -236,13 +238,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/boardList.kly")) {
-			action = new BoardListAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			// 4) 게시물 댓글  등록_리스트 페이지
 		} else if (command.equals("/boardComment.kly")) {
 			action = new BoardCommentAction();
 			try {
@@ -250,6 +246,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 카테고리 설정_리스트 페이지
 		} else if (command.equals("/boardCategory.kly")) {
 			action = new BoardCategoryAction();
 			try {
@@ -257,7 +254,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			// 4) 리스트 페이지 정렬_리스트 페이지
 		} else if (command.equals("/boardArray.kly")) {
 			action = new BoardArrayAction();
 			try {
@@ -265,6 +262,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 추천_리스트 페이지
 		} else if (command.equals("/boardLike.kly")) {
 			action = new BoardLikeAction();
 			try {
@@ -272,6 +270,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 신고_리스트 페이지
 		} else if (command.equals("/boardReport.kly")) {
 			action = new BoardReportAction();
 			try {
@@ -279,6 +278,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 삭제_리스트 페이지
 		} else if (command.equals("/boardDelete.kly")) {
 			action = new BoardDeleteAction();
 			try {
@@ -286,6 +286,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 검색_리스트 페이지
 		} else if (command.equals("/boardSearch.kly")) {
 			action = new BoardSearchAction();
 			try {
@@ -293,6 +294,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 더보기_리스트 페이지
 		} else if (command.equals("/moreList.kly")) {
 			action = new MoreListAction();
 			try {
@@ -300,6 +302,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 신고 리스트_관리자 페이지
 		} else if (command.equals("/boardSuspendList.kly")) { // 게시물 관리페이지
 			action = new BoardSuspendListAction();
 			try {
@@ -307,6 +310,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 삭제_관리자 페이지
 		} else if (command.equals("/boardSuspendDelete.kly")) { // 게시물 관리페이지에서의 삭제
 			action = new BoardSuspendDeleteAction();
 			try {
@@ -314,6 +318,7 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// 4) 게시물 신고 리스트_관리자 페이지
 		} else if (command.equals("/boardSuspendRelieve.kly")) { // 게시물 관리페이지에서의 신고 해제(REPORT_COUNT = 0)
 			action = new BoardSuspendRelieveAction();
 			try {
@@ -349,7 +354,12 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("/cancelLike.kly")) {
+			response.getWriter().write("success");
 		}
+		
+		
+		//./cancleLike.kly
 
 		/** 2. ActionForward 인스턴스에 따른 forwarding */
 		if (forward != null) {

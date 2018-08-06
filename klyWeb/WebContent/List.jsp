@@ -50,49 +50,15 @@ body {
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	/* function loadNextMore() {
-		var more = $('#more').val();
-		more = parseInt(more);
-		more += 4;
-		$.ajax({
-			type : 'post',
-			url : 'moreList.kly',
-			data : ({
-				more : more
-			}),
-			success : function(data) {
 
-			}
-		})
-	} */
-	$(window).on('moreList', function() {
-		load('#vedio', '4');
-		$("#btn .btn btn-default btn-sm btn-block").on("click", function() {
-			moreList('#vedio', '4', '#btn');
-		})
-	});
-
-	function moreList(id, cnt, btn) {
-		var girls_list = id + " #card:not(.active)";
-		var girls_length = $(girls_list).length;
-		var girls_total_cnt;
-		if (cnt < girls_length) {
-			girls_total_cnt = cnt;
-		} else {
-			girls_total_cnt = girls_length;
-			$('.btn btn-default btn-sm btn-block').hide()
-		}
-		$(girls_list + ":lt(" + girls_total_cnt + ")").addClass("active");
-	}
-</script>
 <title>Title</title>
 </head>
 
 <body>
 	<!-- 상단바(footer) -->
 	<%@include file="./navbarTemplate.jsp"%>
-	<!--리스트 페이지의 몸통부분 -->
+	
+	<!--리스트 페이지의 몸통부분(article) -->
 	<div class="main" style="height: 100%; width: 1920px">
 		<!--몸통부분의 왼쪽 부분으로 동영상을 분류 별로 선택해서 보는 기능 으로 
 	category 값을 BoardCategoryAction 으로 넘김  -->
@@ -144,6 +110,7 @@ body {
 		</div>
 		
 		<script>
+		/* 검색어 제한 함수 */
 		function searchCheck() {
 			var search = document.getElementById("search");
 			if(search.value == "") {
@@ -152,9 +119,8 @@ body {
 				document.getElementById("searchForm").submit();
 			}
 		}
-		
-		
 		</script>
+		
 		<!-- 조회 수,추천 수 중 정렬기준을 정하는 기능 array와 category 값을 같이넘겨서 카테고리 내에서도 정렬 기준을 선택 할 수 있음(전체목록 정렬이 안됨)-->
 		<div class="main" id="rightbody"
 			style="height: 100%; width: 1670px; float: right; overflow-x: auto;">
@@ -173,10 +139,12 @@ body {
 			<!-- 간단한 정보만 출력하고 버튼 클릭시 영상과 함께 댓글을 볼 수 도있고 달 수 도있는 기능 
 				display:none 으로 인해 보이지 않는 페이지가 버튼을 클릭하면 block으로 바뀌어서 볼수 있음 -->
 			<c:forEach var="board" items="${boardlist}" varStatus="status">
+				
 				<div id="id0${status.count}" class="panel black display-container"
 					style="display: none;">
 					<span onclick="this.parentElement.style.display='none'"><i
 						class="fa fa-close btn-light"></i></span>
+					
 					<div>
 						<div class="view" style="width: 40%">
 							<div class="list-group" style="float: right">
@@ -188,6 +156,7 @@ body {
 								<div>${board.BOARD_VIDEO_URL}</div>
 							</div>
 						</div>
+						
 						<div class="view"
 							style="position: relative; width: 58%; height: 494px">
 							<div class="bg-light rounded"
@@ -239,8 +208,10 @@ body {
 					</div>
 				</div>
 			</c:forEach>
+			
 			<c:set var="i" value="0" />
 			<c:set var="j" value="5" />
+			
 			<table id="video">
 				<c:forEach var="board" items="${boardlist}" varStatus="status">
 					<c:if test="${i%j == 0 }">
@@ -273,6 +244,7 @@ body {
 							</div>
 						</div>
 					</td>
+					
 					<c:if test="${i%j == j-1 }">
 						</tr>
 					</c:if>
@@ -329,11 +301,12 @@ body {
 						</div>
 
 						<div id="video">
-							<label for="video_upload">동영상 올리기</label> <input type="radio"
-								id="video_upload" name="videoFile" value="upload"
-								onclick="switchDisplay('input_upload');"> <label
-								for="video">URL</label> <input type="radio" id="video_URL"
-								name="videoURL" value="url"
+							<label for="video_upload">동영상 올리기</label>
+							<input type="radio" id="video_upload" name="videoFile" value="upload" 
+							onclick="switchDisplay('input_upload');">
+							
+							<label for="video">URL</label>
+							<input type="radio" id="video_URL" name="videoURL" value="url" checked="checked"
 								onclick="switchDisplay('input_url');">
 
 							<div id="input_upload" style="display: none">
@@ -342,7 +315,7 @@ body {
 
 							<div id="input_url" style="display: none">
 								<input type="url" class="form-control" name="video_URL"
-									value="http://">
+									value="https://">
 							</div>
 						</div>
 

@@ -53,27 +53,30 @@
 			<div class="col-md-8 col-lg-9">
 				<div class="container">
 					<h2>게시물 리스트</h2>
-					<div class="btn-group center">
-						<button class="btn btn-secondary" onclick="location.href ='./myContent.kly?listType=article';">작성한 게시물</button>
-						<button class="btn btn-secondary" onclick="location.href ='./myContent.kly?listType=comment'">댓글</button>
-						<button class="btn btn-secondary" onclick="location.href ='./myContent.kly?listType=liked'">추천한 게시물</button>
+					<div class="container">
+						<div class="mr-auto"></div>
+						<div class="btn-group center">
+							<button class="btn btn-secondary" onclick="location.href ='./myContent.kly?listType=article';">작성한 게시물</button>
+							<button class="btn btn-secondary" onclick="location.href ='./myContent.kly?listType=comment'">댓글</button>
+							<button class="btn btn-secondary" onclick="location.href ='./myContent.kly?listType=liked'">추천한 게시물</button>
+						</div>
 					</div>
 					
-					<table class="table table-hover">
-						<thead class="thead-light">
-							<tr>
-								<th colspan="3">
-									<div class="container-fluid" style="text-align: center;">
-										asd
-									</div>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-						
-							
+					
+					<table class="table table-hover" style="text-align:center;">
+					
 							<c:choose>
 								<c:when test="${param.listType eq 'article'}">
+								
+									<thead class="thead-light">
+										<tr>
+											<th>제목</th>
+											<th>url</th>
+											<th>수정</th>
+										</tr>
+									</thead>
+									<tbody>
+									
 									<c:forEach var="article" items="${articleList}">
 										<tr>
 											<td>${article.BOARD_SUBJECT}</td>
@@ -84,6 +87,16 @@
 								</c:when>
 								
 								<c:when test="${param.listType eq 'comment'}">
+									
+									<thead class="thead-light">
+										<tr>
+											<th>내용</th>
+											<th>작성날짜</th>
+											<th>수정</th>
+										</tr>
+									</thead>
+									<tbody>
+									
 									<c:forEach var="comment" items="${commentList}">
 										<tr>
 											<td>${comment.COMMENT_CON}</td>
@@ -91,18 +104,31 @@
 											<td><button class="btn btn-info" data-toggle="modal" data-target="#ArticleForm" >수정</button></td>
 										<tr>
 									</c:forEach>
+									
+									<!-- 수정 폼 -->
+									
+									
+									
 								</c:when>
 								
 								<c:when test="${param.listType eq 'liked'}">
+									
+									<thead class="thead-light">
+										<tr>
+											<th>게시물 번호</th>
+											<th>댓글 번호</th>
+											<th>수정</th>
+										</tr>
+									</thead>
+									<tbody>
+									
 									<c:forEach var="like" items="${likeList}">
 										<tr>
 											<td>${like.BOARD_NUM}</td>
 											<td>${like.LIKE_NUM}</td>
-											 <!-- 좋아요를 했을 경우 좋아요 취소(danger) -->
-											<td><button class="btn btn-danger" >좋아요 취소</button></td>
-											 
-											 <!-- 좋아요를 취소 했을 경우 좋아요(primary) -->
-											 <td><button class="btn btn-primary" >좋아요 취소</button></td>
+											<!-- 좋아요를 했을 경우 좋아요 취소(danger) -->
+											<td><button class="btn btn-info" disabled="disabled" type="button" id="${like.BOARD_NUM}${like.LIKE_NUM}" onclick="cancelLike()">좋아요 취소</button></td>
+											
 										<tr>
 									</c:forEach>
 								</c:when>
@@ -123,6 +149,23 @@
 	<div class="jumbotron text-center">
 		<p>&copy; 2018 kly</p>
 	</div>
+	
+	<script>
+		/* 좋아요 취소 함수 */
+		function cancelLike() {
+			var req = new XMLHttpRequest();
+			req.onreadystatechange = function() {
+				console.log(this.readyState);
+				if(this.readyState == 4 && this.status == 200) {
+					var button = document.getElementById("24");
+					console.log(button);
+					button.className += " disabled";
+				}
+			}
+			req.open("GET", "./cancelLike.kly", true);
+			req.send
+		}
+	</script>
 	
 </body>
 </html>
