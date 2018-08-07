@@ -755,6 +755,7 @@ public class BoardDAO {
 			System.out.println("검색 오류" + e);
 		} finally {
 			close(pstmt);
+			close(rs);
 		}
 		return boardList;
 	}
@@ -791,8 +792,8 @@ public class BoardDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				rs.close();
+				close(pstmt);
+				close(rs);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -831,8 +832,8 @@ public class BoardDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				rs.close();
+				close(pstmt);
+				close(rs);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -840,42 +841,6 @@ public class BoardDAO {
 		return topLikeList; // 데이터베이스 오류
 	}
 
-	/*public ArrayList<BoardBean> getboardSuspendList() { // 관리자 게시물 리스트 출력 - 게시글 정보
-		System.out.println("boardSuspendList DAO");
-		String sql = "SELECT BOARD.BOARD_URL, BOARD.BOARD_NUM, BOARD.BOARD_SUBJECT FROM BOARD, REPORT WHERE BOARD.BOARD_NUM = REPORT.BOARD_NUM AND REPORT.REPORT_COUNT >= 3";
-
-		ArrayList<BoardBean> boardSuspendList = new ArrayList<BoardBean>(); // boardSuspendList 객체 배열 선언
-		try {
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				BoardBean boardBean = new BoardBean(); // boardBean 객체 선언
-
-				boardBean.setBOARD_NUM(rs.getInt("BOARD_NUM"));
-				// boardBean.setBOARD_CATEGORY(rs.getString("BOARD_CATEGORY"));
-				boardBean.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
-				// boardBean.setBOARD_DATE(rs.getDate("BOARD_DATE"));
-				// boardBean.setBOARD_VIDEO_FILE(rs.getString("BOARD_FILE"));
-				boardBean.setBOARD_VIDEO_URL(rs.getString("BOARD_URL"));
-				// boardBean.setBOARD_TAG(rs.getString("BOARD_TAG"));
-				// boardBean.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
-				// boardBean.setBOARD_LIKECOUNT(rs.getInt("BOARD_LIKECOUNT"));
-				// boardBean.setMEMBER_ID(rs.getString("MEMBER_ID"));
-				boardSuspendList.add(boardBean);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-				rs.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return boardSuspendList;
-	}*/
 
 	public ArrayList<ReportBean> getreportSuspendList() {	//관리자 게시물 리스트 출력 - 신고 정보 
 		System.out.println("reportSuspendList DAO");
@@ -1009,6 +974,7 @@ public class BoardDAO {
 			System.out.println("viewCount 오류" + e);
 		} finally {
 			close(pstmt);
+			close(rs);
 		}
 		return updateResult;
 	}

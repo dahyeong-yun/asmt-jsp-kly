@@ -60,10 +60,7 @@ public class MemberDAO {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-			
 		}
-		
-		
 		return result;
 	}
 
@@ -266,8 +263,8 @@ public class MemberDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				rs.close();
+				close(pstmt);
+				close(rs);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -289,7 +286,7 @@ public class MemberDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
+				close(pstmt);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -335,7 +332,6 @@ public class MemberDAO {
 		} finally {
 			close(rs);
 			close(pstmt);
-
 		}
 		return memberlist;
 
@@ -381,15 +377,6 @@ public class MemberDAO {
 		int deleteResult = 0;
 
 		try {
-			/*
-			 * for (int i = 1; i <= 5; i++) { System.out.println("sql" +
-			 * Integer.toString(i)); pstmt = con.prepareStatement("sql" +
-			 * Integer.toString(i)); pstmt.setString(1, mEM_ID); selectResult =
-			 * pstmt.executeUpdate(); System.out.println(selectResult); if (selectResult !=
-			 * 0) { pstmt = con.prepareStatement("sql1" + Integer.toString(i));
-			 * pstmt.setString(1, mEM_ID); deleteResult = pstmt.executeUpdate();
-			 * selectResult = 0; } }
-			 */
 
 			pstmt = con.prepareStatement(sql1);
 			pstmt.setString(1, mEM_ID);

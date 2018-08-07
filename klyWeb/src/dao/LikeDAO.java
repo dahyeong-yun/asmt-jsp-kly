@@ -59,8 +59,8 @@ public class LikeDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				rs.close();
+				close(pstmt);
+				close(rs);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

@@ -68,8 +68,8 @@ public class CommentDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				rs.close();
+				close(pstmt);
+				close(rs);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -99,8 +99,8 @@ public class CommentDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				rs.close();
+				close(pstmt);
+				close(rs);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
