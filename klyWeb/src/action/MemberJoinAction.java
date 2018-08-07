@@ -34,8 +34,8 @@ public class MemberJoinAction implements Action {
 		mb.setMEMBER_PW(pwd);
 		mb.setMEMBER_EMAIL(email);
 
+		// 서비스에서 가입
 		MemberJoinService mjs = new MemberJoinService();
-		
 		int result = mjs.joinMember(mb);
 		
 		ActionForward af = null;

@@ -105,7 +105,9 @@ public class MemberController extends HttpServlet {
 			ajax = new IndexTopListAjax();
 			try {
 				responseText = ajax.getJSON(request, response); // JSON
+				System.out.println("\nTOP READ LIST responseText 반환\n");
 				response.getWriter().write(responseText);
+				System.out.println("\nTOP READ LIST 반환\n");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

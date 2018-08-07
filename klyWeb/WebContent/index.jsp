@@ -17,7 +17,7 @@
 
 	<!-- 리스트 출력 프로세스 -->
 	<script type="text/javascript">
-		window.onload = function () { // 이게 페이지 로드 시 출력되게 수정, 아마 window.onload
+		function aws() { // 이게 페이지 로드 시 출력되게 수정, 아마 window.onload
 			var req = new XMLHttpRequest();
 		
 			req.onreadystatechange = function() {
@@ -54,41 +54,41 @@
 			req.send();
 		}
 		
-		 function ajs () { // 이게 페이지 로드 시 출력되게 수정, 아마 window.onload
-				var req= new XMLHttpRequest();
-				req.onreadystatechange = function() {
-					if(this.readyState == 4 && this.status ==200) {
-						var arr = JSON.parse(this.responseText);
-						var out =
-							"<tr>" +
-								"<td>" + arr.value0[0] + "</td>"+
-								"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value0[1] + "\"></a></td>"+
-								"<td>" + arr.value0[2] + "</td>"+
-								"<td>" + arr.value0[3] + "</td>"+
-								"<td>" + arr.value0[4] + "</td>"+
-							"</tr>" +
-							"<tr>" +
-								"<td>" + arr.value1[0] + "</td>"+
-								"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value1[1] + "\"></a></td>"+
-								"<td>" + arr.value1[2] + "</td>"+
-								"<td>" + arr.value1[3] + "</td>"+
-								"<td>" + arr.value1[4] + "</td>"+
-							"</tr>" +
-							"<tr>" +
-								"<td>" + arr.value2[0] + "</td>"+
-								"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value2[1] + "\"></a></td>"+
-								"<td>" + arr.value2[2] + "</td>"+
-								"<td>" + arr.value2[3] + "</td>"+
-								"<td>" + arr.value2[4] + "</td>"+
-							"</tr>";
-						}
-					
-						document.getElementById("topLikedList").innerHTML = out;
+		function ajs() { // 이게 페이지 로드 시 출력되게 수정, 아마 window.onload
+			var req= new XMLHttpRequest();
+			req.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status ==200) {
+					var arr = JSON.parse(this.responseText);
+					var out =
+						"<tr>" +
+							"<td>" + arr.value0[0] + "</td>"+
+							"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value0[1] + "\"></a></td>"+
+							"<td>" + arr.value0[2] + "</td>"+
+							"<td>" + arr.value0[3] + "</td>"+
+							"<td>" + arr.value0[4] + "</td>"+
+						"</tr>" +
+						"<tr>" +
+							"<td>" + arr.value1[0] + "</td>"+
+							"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value1[1] + "\"></a></td>"+
+							"<td>" + arr.value1[2] + "</td>"+
+							"<td>" + arr.value1[3] + "</td>"+
+							"<td>" + arr.value1[4] + "</td>"+
+						"</tr>" +
+						"<tr>" +
+							"<td>" + arr.value2[0] + "</td>"+
+							"<td><a href=\"./boardList.kly\"><img src=\"" + arr.value2[1] + "\"></a></td>"+
+							"<td>" + arr.value2[2] + "</td>"+
+							"<td>" + arr.value2[3] + "</td>"+
+							"<td>" + arr.value2[4] + "</td>"+
+						"</tr>";
 					}
 				
-				req.open("GET","./indexLikeList.kly", true);
-				req.send();
-			}
+					document.getElementById("topLikedList").innerHTML = out;
+				}
+			
+			req.open("GET","./indexLikeList.kly", true);
+			req.send();
+		}
 	</script>
 
 	<style>
@@ -199,6 +199,7 @@
 	
 	<script>
 	 	ajs();
+	 	aws();
 	</script>
 	
 </body>

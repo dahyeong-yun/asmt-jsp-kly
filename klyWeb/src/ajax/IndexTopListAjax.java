@@ -35,7 +35,7 @@ public class IndexTopListAjax implements Ajax {
 		 *	"employees":[ "John", "Anna", "Peter" ]
 		 * }
 		 * */
-
+		System.out.println("topReadcountList.size() : "+topReadcountList.size());
 		result.append("{");
 		// topReadcountList를 JSON 형태로 변환
 		for(int i=0; i<topReadcountList.size(); i++) {
@@ -59,7 +59,9 @@ public class IndexTopListAjax implements Ajax {
 		}
 		result.append("}");
 		request.setAttribute("topReadcountList", topReadcountList);
+		System.out.println(":: TOP READCOUNT LIST ::\n"+result.toString()+"\nprintEnd");
 		System.out.println(result.toString());
+		System.out.println(":: TOP READCOUNT LIST END ::");
 		return result.toString();
 	}
 
