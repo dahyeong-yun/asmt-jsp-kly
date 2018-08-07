@@ -64,9 +64,22 @@ body {
 	
 <title>Title</title>
 <script>
+	var view = null;
+	
 	function viewCount(id, boardNum) {
-		var content = document.getElementById(id);
-		content.style.display = 'block';
+		if(view == null) {
+			var content = document.getElementById(id);
+			content.style.display = 'block';
+			view = id;
+		} else {
+			var content = document.getElementById(id);
+			content.style.display = 'block';
+			var activeContent = document.getElementById(view);
+			activeContent.style.display='none';
+			view = id;
+		}
+		content.scrollIntoView();
+		
 		
 		var req = new XMLHttpRequest();
 		req.onreadystatechange = function () {
@@ -168,12 +181,12 @@ body {
 			<c:forEach var="board" items="${boardlist}" varStatus="status">
 				
 				<div id="id0${status.count}" class="panel black display-container"
-					style="display: none;">
+					style="display: none">
 					<span onclick="this.parentElement.style.display='none'"><i
 						class="fa fa-close btn-light"></i></span>
 					
 					<div>
-						<div class="view" style="width: 40%">
+						<div class="view" style="width: 46%; height: 494px">
 							<div class="list-group" style="float: right">
 								<div class="bg-light rounded-top"
 									style="border: 1px solid; height: 32px; width: 560px;">
@@ -185,7 +198,7 @@ body {
 						</div>
 						
 						<div class="view"
-							style="position: relative; width: 58%; height: 494px">
+							style="position: relative; width: 52%; height: 494px">
 							<div class="bg-light rounded"
 								style="width: 560px; height: 480px; border: 1px solid">
 								<div style="border-bottom: 1px solid">
@@ -283,7 +296,6 @@ body {
 					if (nowPage <= 1) {
 				%>
 				<button type="button" class="btn btn-outline-info">이전</button>
-				&nbsp;
 				<%
 					} else {
 				%>
@@ -303,7 +315,6 @@ body {
 				%>
 					<button type="button" class="btn btn-outline-info"
 						onclick="location='boardList.kly?page=<%=a%>'"><%=a%></button>
-					&nbsp;
 					<%
 					}
 				%>
