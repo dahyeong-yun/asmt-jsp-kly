@@ -9,6 +9,9 @@ public class ReportBean {
 	private int REPORT_COUNT;	//신고 횟수
 	private Date REPORT_DATE;	//신고 시간
 	
+	private String BOARD_URL;	//동영상 URL
+	private String BOARD_SUBJECT;	//글제목
+	
 	public String getMEMBER_ID() {
 		return MEMBER_ID;
 	}
@@ -39,5 +42,18 @@ public class ReportBean {
 	public void setREPORT_DATE(Date rEPORT_DATE) {
 		REPORT_DATE = rEPORT_DATE;
 	}
+	public String getBOARD_URL() {
+		return BOARD_URL;
+	}
+	public void setBOARD_URL(String bOARD_URL) {
+		BOARD_URL = bOARD_URL;
+	}
+	public String getBOARD_SUBJECT() {
+		return BOARD_SUBJECT;
+	}
+	public void setBOARD_SUBJECT(String bOARD_SUBJECT) {
+		BOARD_SUBJECT = bOARD_SUBJECT;
+	}
+	
 	
 }

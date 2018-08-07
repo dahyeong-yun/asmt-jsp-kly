@@ -12,7 +12,7 @@ import bean.ReportBean;
 
 public class BoardSuspendListService {
 
-	public ArrayList<BoardBean> getBoardSuspendList() {
+	/*public ArrayList<BoardBean> getBoardSuspendList() {
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		Connection con = getConnection();
 		boardDAO.setConnection(con);
@@ -20,7 +20,7 @@ public class BoardSuspendListService {
 		ArrayList<BoardBean> boardSuspendList = boardDAO.getboardSuspendList();
 		close(con);
 		return boardSuspendList;
-	}
+	}*/
 	
 	public ArrayList<ReportBean> getReportSuspendList() {
 		BoardDAO boardDAO = BoardDAO.getInstance();
